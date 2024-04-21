@@ -8,21 +8,107 @@
 #include "column.h"
 
 
-typedef struct maillon
-{
-    COLUMN column;
-    struct maillon *prev;
-    struct maillon *succ;
+/**
+* Element lnode
+*/
+typedef struct lnode_ {
+    void *data;
+    struct lnode_ *prev;
+    struct lnode_ *next;
+} lnode;
 
-}maillon;
+
+/**
+* A list
+*/
+typedef struct list_ {
+    lnode *head;
+    lnode *tail;
+} list;
 
 
-typedef struct dllist
-{
-    int size;
-    maillon *first;
-    maillon *last;
-}dllist;
+/**
+ * @brief: Initialize node
+ * @param1: Pointer to the data
+ * @return: Pointer to the node
+ */
+lnode *lst_create_lnode(void *dat);
+
+
+/**
+ * @brief: Initialize a list
+ * @return: Pointer to the list
+ */
+list *lst_create_list();
+
+
+/**
+ * @brief: Delete a list
+ * @param1: Pointer to the list
+ */
+void lst_delete_list(list * lst);
+
+
+/**
+ * @brief: Insert a pnew to the beginning of the list
+ * @param1: Pointer to the list
+ * @param2: Pointer to the new head/node
+ */
+void lst_insert_head(list * lst, lnode * pnew);
+
+
+/**
+ * @brief: Insert a pnew to the end of the list
+ * @param1: Pointer to the list
+ * @param2: Pointer to the new tail/node
+ */
+void lst_insert_tail(list * lst, lnode * pnew);
+
+
+/**
+ * @brief: Insert the new node pointed by pnew after the node pointed by ptr
+ * @param1: Pointer to the list
+ * @param2: Pointer to the new node
+ * @param3: Pointer to the node
+ */
+void lst_insert_after(list * lst, lnode * pnew, lnode * ptr);
+
+
+/**
+ * @brief: Delete the first element of the list
+ * @param1: Pointer to the list
+ */
+void lst_delete_head(list * lst);
+
+
+/**
+ * @brief: Delete the last element of the list
+ * @param1: Pointer to the list
+ */
+void lst_delete_tail(list * lst);
+
+
+/**
+ * @brief: Delete the node pointed by ptr
+ * @param1: Pointer to the list
+ * @param2: Pointer to the node
+ */
+void lst_delete_lnode(list * lst, lnode * ptr);
+
+
+/**
+ * @brief: Delete all the elements of the list
+ * @param1: Pointer to the list
+ */
+void lst_erase(list * lst);
+
+
+/**
+ * @brief: Return the first node
+ * @param1: Pointer to the CDataFrame to create
+ * @return: 1 if the CDataFrame is correctly created 0 otherwise
+ */
+lnode *get_first_node(list * lst);
 
 
 /**
@@ -30,71 +116,22 @@ typedef struct dllist
  * @param1: Pointer to the CDataFrame to create
  * @return: 1 if the CDataFrame is correctly created 0 otherwise
  */
-int init(dllist *list);
+lnode *get_last_node(list * lst);
+
 
 /**
- * @brief: Adds an column to the first position of the CDataFrame
- * @param1: Pointer to the CDataFrame to edit
- * @param2: Value to add to the CDataFrame
- * @return: 1 if the column is correctly inserted 0 otherwise
+ * @brief: return the pointer next node
+ * @param1: Pointer to list
+ * @param2: Pointer to the node
+ * @return: Pointer to the next node
  */
-int add_first(dllist *list, COLUMN *column);
+lnode *get_next_node(list * lst, lnode * lnode);
+
 
 /**
- * @brief: Adds an column to the last position of the CDataFrame
- * @param1: Pointer to the CDataFrame to edit
- * @param2: Value to add to the CDataFrame
- * @return: 1 if the column is correctly inserted 0 otherwise
+ * @brief: Initialize the CDataFrame
+ * @param1: Pointer to the CDataFrame to create
  */
-int add_last(dllist *list, COLUMN *column);
-
-/**
- * @brief: Remove the first column of the CDataFrame
- * @param1: Pointer to the CDataFrame to edit
- * @return: 1 if the value is correctly removed 0 otherwise
- */
-int remove_first(dllist *list);
-
-/**
- * @brief: Remove the last column of the CDataFrame
- * @param1: Pointer to the CDataFrame to edit
- * @return: 1 if the value is correctly removed 0 otherwise
- */
-int remove_last(dllist *list);
-
-/**
- * @brief: Shows the entire CDataFrame
- * @param1: Pointer to the CDataFrame to show
- * @return: 1 if there is no error 0 otherwise
- */
-int view(dllist *list);
-
-/**
- * @brief: Clear the CDataFrame
- * @param1: Pointer to the CDataFrame to clear
- * @return: 1 if the CDataFrame is correctly cleared 0 otherwise
- */
-int clear(dllist *list);
-
-/**
- * @brief: Sort the CDataFrame in ascending or descending order by the number of element per column
- * @param1: Pointer to the CDataFrame to sort
- * @param2: If 0 sort in ascending order \n
- *        : if 1 sort in descending order
- * @return: 1 if the CDataFrame is correctly sorted 0 otherwise
- */
-int sort(dllist *list, int *ascending);
-
-/**
- * @brief: Access a to a specific element in a CDataFrame by its index
- * @param1: Pointer to the CDataFrame
- * @param2: the column where the element is located
- * @param3: the line where the element is located
- * @param4: If 0 starts at the beginning \n
- *        : If 1 start at the end
- * @param5: Pointer that will point to the element
- * @return: 1 if the CDataFrame is correctly sorted 0 otherwise
- */
-int view_element(dllist *list, int column, int line, int method, COL_TYPE *value);
+void *get_previous_elem(list * lst, lnode * lnode);
 
 #endif //CDATAFRAME_PEREZ_LENAIN_BENSIFI_LIST_H
