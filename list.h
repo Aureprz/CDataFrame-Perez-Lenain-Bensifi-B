@@ -1,7 +1,3 @@
-//
-// Created by aurel on 21/04/2024.
-//
-
 #ifndef CDATAFRAME_PEREZ_LENAIN_BENSIFI_LIST_H
 #define CDATAFRAME_PEREZ_LENAIN_BENSIFI_LIST_H
 
