@@ -12,7 +12,7 @@ typedef struct COLUMN{
     int TPHYS;
     int TL;
     ENUM_TYPE TYPE;
-
+    void* DATA;
     int* INDEX;
 };
 
