@@ -4,8 +4,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
-    dllist *CDataFrame;
+int main(){
+
+    return 0;
+}
+
+
+
+
+
+    /* dllist *CDataFrame;
     COL_TYPE cell;
     ENUM_TYPE typecolumn;
     int temp, i, nb_val;
@@ -67,7 +75,6 @@ int main() {
     }
 
     show_cdataframe(CDataFrame);
-    return 0;
-}
+     */
 
 
