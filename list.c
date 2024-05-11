@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "list.h"
 
 lnode *lst_create_lnode(void *dat) {
     lnode *ptmp = (lnode *) malloc(sizeof(lnode));

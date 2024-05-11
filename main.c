@@ -5,7 +5,15 @@
 #include <stdlib.h>
 
 int main(){
+    COLUMN *mycol = create_column(CHAR, "Column 1");
+    int size = 256;
+    char a = 'A', c = 'C', str[size];
 
+    insert_value(mycol, &a);
+    insert_value(mycol, NULL);
+    insert_value(mycol, &c);
+    print_col(mycol);
+    delete_column(&mycol);
     return 0;
 }
 

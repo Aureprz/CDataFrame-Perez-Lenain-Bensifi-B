@@ -19,11 +19,20 @@ typedef union column_type{
 
 typedef struct COLUMN{
     char* title;
-    int size;
-    int max_size;
+    unsigned int size;
+    unsigned int max_size;
     ENUM_TYPE column_type;
     COL_TYPE **data;
     unsigned long long int *index;
+    // index valid
+    // 0 : no index
+    //-1 : invalid index
+    // 1 : valid index
+    int valid_index;
+    // direction de tri Ascendant ou Déscendant
+    // 0 : ASC
+    // 1 : DESC
+    int sort_dir;
 }COLUMN;
 
 
