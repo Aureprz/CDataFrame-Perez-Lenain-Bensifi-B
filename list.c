@@ -1,3 +1,4 @@
+
 //
 // Created by aurel on 21/04/2024.
 //
@@ -5,8 +6,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include "list.h"
 
 
 lnode *lst_create_lnode(void *dat) {

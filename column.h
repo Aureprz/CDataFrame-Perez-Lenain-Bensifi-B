@@ -35,6 +35,7 @@ typedef struct COLUMN{
 */
 COLUMN *create_column(ENUM_TYPE type, char *title);
 
+
 /**
 * @brief: Insert a new value into a column
 * @param1: Pointer to the column
@@ -43,11 +44,13 @@ COLUMN *create_column(ENUM_TYPE type, char *title);
 */
 int insert_value(COLUMN *col, void *value);
 
+
 /**
 * @brief: Free the space allocated by a column
 * @param1: Pointer to the column
 */
 void delete_column(COLUMN **col);
+
 
 /**
  * @brief: Convert a value into a string
@@ -57,6 +60,7 @@ void delete_column(COLUMN **col);
  * @param4: Maximum size of the string
  */
 void convert_value(COLUMN *col, unsigned long long int i, char *str, int size);
+
 
 /**
  * @brief: Display the content of a column
