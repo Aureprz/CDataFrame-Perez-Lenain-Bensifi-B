@@ -77,5 +77,41 @@ void convert_value(COLUMN *col, unsigned long long int i, char *str, int size);
  */
 void print_col(COLUMN* col);
 
+/**
+ * @brief:  Looks for a value in the CDataFrame
+ * @param1: Pointer to the CDataFrame
+ * @param2: value wanted
+ * @param3: value type
+ * @return: 1 if the value exists 0 otherwise
+ */
+int exist_col(COLUMN* col, void *value);
+
+/**
+ * @brief:  Shows the numbers of cells match with the value in the CDataFrame
+ * @param1: Pointer to the CDataFrame
+ * @param2: value wanted
+ * @param3: value type
+ * @return: number of cells equals
+ */
+int cellsequal_col(COLUMN* col, void *value);
+
+/**
+ * @brief:  Shows the numbers of cells superior than the value in the CDataFrame
+ * @param1: Pointer to the CDataFrame
+ * @param2: value wanted
+ * @param3: value type
+ * @return: number of cells superior
+ */
+int cellssup_col(COLUMN* col, void *value);
+
+/**
+ * @brief:  Shows the numbers of cells inferior than the value in the CDataFrame
+ * @param1: Pointer to the CDataFrame
+ * @param2: value wanted
+ * @param3: value type
+ * @return: number of cells inferior
+ */
+int cellsinf_col(COLUMN* col, void *value);
+
 
 #endif //CDATAFRAME_PEREZ_LENAIN_BENSIFI_COLUMN_H

@@ -5,6 +5,7 @@
 #include "column.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 COLUMN *create_column(ENUM_TYPE type, char *title){
     COLUMN* col = NULL;
@@ -131,4 +132,188 @@ void print_col(COLUMN* col){
     }
 }
 
+int exist_col(COLUMN* col, void *value){
+    int cpt = 0;
+    if (col == NULL || col->size == 0){
+        return 0;
+    }
+    for(unsigned long long int i = 0; i < col->size; i++){
+        switch (col->column_type) {
+
+            case INT:
+                if (*((int*)col->data[i]) == *((int *)value)){
+                    return 1;
+                }
+                break;
+            case UINT:
+                if (*((unsigned int*)col->data[i]) == *((unsigned int *)value)){
+                    return 1;
+                }
+                break;
+            case FLOAT:
+                if (*((float*)col->data[i]) == *((float *)value)){
+                    return 1;
+                }
+                break;
+            case DOUBLE:
+                if (*((double*)col->data[i]) == *((double *)value)){
+                    return 1;
+                }
+                break;
+            case CHAR:
+                if (*((char*)col->data[i]) == *((char *)value)){
+                    return 1;
+                }
+                break;
+            case STRING:
+                if (strcmp((char*)col->data[i], (char *)value) == 0){
+                    return 1;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    return 0;
+}
+
+int cellsequal_col(COLUMN* col, void *value){
+    int cpt = 0;
+    if (col == NULL || col->size == 0){
+        return 0;
+    }
+    for(unsigned long long int i = 0; i < col->size; i++){
+        switch (col->column_type) {
+
+            case INT:
+                if (*((int*)col->data[i]) == *((int *)value)){
+                    cpt++;
+                }
+                break;
+            case UINT:
+                if (*((unsigned int*)col->data[i]) == *((unsigned int *)value)){
+                    cpt++;
+                }
+                break;
+            case FLOAT:
+                if (*((float*)col->data[i]) == *((float *)value)){
+                    cpt++;
+                }
+                break;
+            case DOUBLE:
+                if (*((double*)col->data[i]) == *((double *)value)){
+                    cpt++;
+                }
+                break;
+            case CHAR:
+                if (*((char*)col->data[i]) == *((char *)value)){
+                    cpt++;
+                }
+                break;
+            case STRING:
+                if (strcmp((char*)col->data[i], (char *)value) == 0){
+                    cpt++;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    return cpt;
+}
+
+
+
+int cellssup_col(COLUMN* col, void *value){
+    int cpt = 0;
+    if (col == NULL || col->size == 0){
+        return 0;
+    }
+    for(unsigned long long int i = 0; i < col->size; i++){
+        switch (col->column_type) {
+
+            case INT:
+                if (*((int*)col->data[i]) > *((int *)value)){
+                    cpt++;
+                }
+                break;
+            case UINT:
+                if (*((unsigned int*)col->data[i]) > *((unsigned int *)value)){
+                    cpt++;
+                }
+                break;
+            case FLOAT:
+                if (*((float*)col->data[i]) > *((float *)value)){
+                    cpt++;
+                }
+                break;
+            case DOUBLE:
+                if (*((double*)col->data[i]) > *((double *)value)){
+                    cpt++;
+                }
+                break;
+            case CHAR:
+                if (*((char*)col->data[i]) > *((char *)value)){
+                    cpt++;
+                }
+                break;
+            case STRING:
+                if (strcmp((char*)col->data[i], (char *)value) > 0){
+                    cpt++;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    return cpt;
+}
+
+
+
+
+int cellsinf_col(COLUMN* col, void *value){
+    int cpt = 0;
+    if (col == NULL || col->size == 0){
+        return 0;
+    }
+    for(unsigned long long int i = 0; i < col->size; i++){
+        switch (col->column_type) {
+
+            case INT:
+                if (*((int*)col->data[i]) < *((int *)value)){
+                    cpt++;
+                }
+                break;
+            case UINT:
+                if (*((unsigned int*)col->data[i]) < *((unsigned int *)value)){
+                    cpt++;
+                }
+                break;
+            case FLOAT:
+                if (*((float*)col->data[i]) < *((float *)value)){
+                    cpt++;
+                }
+                break;
+            case DOUBLE:
+                if (*((double*)col->data[i]) < *((double *)value)){
+                    cpt++;
+                }
+                break;
+            case CHAR:
+                if (*((char*)col->data[i]) < *((char *)value)){
+                    cpt++;
+                }
+                break;
+            case STRING:
+                if (strcmp((char*)col->data[i], (char *)value) < 0){
+                    cpt++;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    return cpt;
+}
 
