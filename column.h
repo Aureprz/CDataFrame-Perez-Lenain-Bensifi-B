@@ -114,4 +114,11 @@ int cellssup_col(COLUMN* col, void *value);
 int cellsinf_col(COLUMN* col, void *value);
 
 
+/**
+* @brief: Display the content of a sorted column
+* @param1: Pointer to a column
+*/
+void print_col_by_index(COLUMN *col);
+
+
 #endif //CDATAFRAME_PEREZ_LENAIN_BENSIFI_COLUMN_H
