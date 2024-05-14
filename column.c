@@ -1,7 +1,7 @@
 
 #define MAX_SIZE 512
 
-
+#include "sort.h"
 #include "column.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,6 +20,7 @@ COLUMN *create_column(ENUM_TYPE type, char *title){
     col->valid_index = 0;
     col->max_size = 0;
     col->size = 0;
+    col->sort_dir = 0;
     return col;
 }
 
@@ -89,6 +90,7 @@ void delete_column(COLUMN **col){
         free((*col)->data[i]);
     }
     free((*col)->data);
+    erase_index(*col);
     free(col);
 }
 
@@ -135,7 +137,6 @@ void print_col(COLUMN* col){
 }
 
 int exist_col(COLUMN* col, void *value){
-    int cpt = 0;
     if (col == NULL || col->size == 0){
         return 0;
     }

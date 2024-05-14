@@ -116,7 +116,7 @@ lnode *get_first_node(dllist * lst) {
         return NULL;
     return lst->head;
 }
-lnode *get_last_node(list * lst) {
+lnode *get_last_node(dllist * lst) {
     if (lst->tail == NULL)
         return NULL;
     return lst->tail;

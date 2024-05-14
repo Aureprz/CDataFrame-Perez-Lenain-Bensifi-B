@@ -15,11 +15,13 @@ void sort(COLUMN* col, int sort_dir){
     if ((col == NULL) || ((sort_dir != DESC) && (sort_dir != ASC)) || col->data == NULL){
         return;
     }
-
     if(((col->valid_index == 1) && (col->sort_dir == sort_dir)) || (col->size <=1)){
         col->sort_dir = sort_dir;
         col->valid_index = 1;
         return;
+    }
+    if(col->index == NULL){
+        create_index(col);
     }
     if (col->valid_index == -1){
         insertion_sort(col, sort_dir);
@@ -29,14 +31,13 @@ void sort(COLUMN* col, int sort_dir){
     }
     col->sort_dir = sort_dir;
     col->valid_index = 1;
-    return;
 }
 
 unsigned int partition(COLUMN* col, unsigned int left , unsigned int right, int sort_dir){
     unsigned long long int pivot = col->index[right];
-    unsigned int i = (left -1), j;
+    unsigned int i = left-1, j;
 
-    for(j = left ; j < (right - 1); j++){
+    for(j = left ; j < right; j++){
         if(((sort_dir == ASC) && (compare_in_col(col, col->index[j], pivot) <= 0))||
         ((sort_dir == DESC) && (compare_in_col(col, col->index[j], pivot) >= 0))){
             i++;
@@ -58,7 +59,7 @@ void quicksort(COLUMN* col, unsigned int left , unsigned int right, int sort_dir
 }
 
 void create_index(COLUMN *col){
-    if ((col == NULL) || (col->index == NULL)){
+    if ((col == NULL) || (col->index != NULL)){
         return;
     }
     unsigned long long int i;
@@ -145,17 +146,17 @@ void swap(unsigned long long int *a, unsigned long long int *b){
 void insertion_sort(COLUMN *col, int sort_dir){
     unsigned long long int k;
     int j;
-    for(int i=2; i< col->size; i++){
+    for(int i=1; i< (col->size); i++){
         k = col->index[i];
         j = i - 1;
-        if (sort_dir == ASC) {
-            while((j>0) && (compare_in_col(col, k, col->index[j]) > 0)){
+        if (sort_dir == DESC) {
+            while((j>=0) && (compare_in_col(col, k, col->index[j]) > 0)){
                 col->index[j+1] = col->index[j];
                 j--;
             }
         }
         else {
-            while((j > 0) && (compare_in_col(col, k, col->index[j]) < 0)){
+            while((j >= 0) && (compare_in_col(col, k, col->index[j]) < 0)){
                 col->index[j + 1] = col->index[j];
                 j--;
             }
@@ -163,4 +164,29 @@ void insertion_sort(COLUMN *col, int sort_dir){
         col->index[j+1] = k;
 
     }
+}
+
+void print_col_by_index(COLUMN *col){
+    char str[MAX_SIZE];
+    unsigned long long int i;
+    for (i = 0; i < col->size; i++){
+        convert_value(col, col->index[i], str, MAX_SIZE);
+        printf("[%llu] %s\n", i, str);
+    }
+}
+
+
+int check_index(COLUMN *col){
+    if (col == NULL) {
+        return 0;
+    }
+    return col->valid_index;
+}
+
+void update_index(COLUMN *col){
+    sort(col, col->sort_dir);
+}
+
+int search_value_in_column(COLUMN *col, void *val){
+    //TODO: page 28
 }

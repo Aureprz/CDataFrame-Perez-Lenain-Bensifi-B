@@ -1,3 +1,4 @@
+#include "sort.h"
 #include "column.h"
 #include "cdataframe.h"
 #include "list.h"
@@ -5,15 +6,16 @@
 #include <stdlib.h>
 
 int main(){
-    COLUMN *mycol = create_column(CHAR, "Column 1");
-    int size = 256;
-    char a = 'A', c = 'C', str[size];
-
-    insert_value(mycol, &a);
-    insert_value(mycol, NULL);
-    insert_value(mycol, &c);
+    COLUMN *mycol = create_column(STRING, "String column");
+    insert_value(mycol, "Lima");
+    insert_value(mycol, "Bravo");
+    insert_value(mycol, "Zulu");
+    insert_value(mycol, "Tango");
+    printf("Columncontentbeforesorting :\n");
     print_col(mycol);
-    delete_column(&mycol);
+    sort(mycol,DESC);
+    printf("Columncontentaftersorting: \n");
+    print_col_by_index(mycol);
     return 0;
 }
 
