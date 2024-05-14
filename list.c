@@ -11,21 +11,39 @@
 
 lnode *lst_create_lnode(void *dat) {
     lnode *ptmp = (lnode *) malloc(sizeof(lnode));
-    ptmp->data = dat;
+    ptmp->ln_data = dat;
     ptmp->next = NULL;
     ptmp->prev = NULL;
     return ptmp;
 }
+
+// Functions about lists
 dllist *lst_create_list() {
     dllist *lst = (dllist *) malloc(sizeof(dllist));
     lst->head = NULL;
     lst->tail = NULL;
     return lst;
 }
+
+void lst_erase(dllist * lst) {
+    if (lst->head == NULL)
+        return;
+    while (lst->head != lst->tail) {
+        lst->head = lst->head->next;
+        free(lst->head->prev);
+    }
+    free(lst->head);
+    lst->head = NULL;
+    lst->tail = NULL;
+}
+
 void lst_delete_list(dllist * lst) {
     lst_erase(lst);
     free(lst);
 }
+
+// Functions about nodes
+
 void lst_insert_head(dllist * lst, lnode * pnew) {
     if (lst->head == NULL) {
         lst->head = pnew;
@@ -100,23 +118,15 @@ void lst_delete_lnode(dllist * lst, lnode * ptr) {
     ptr->prev->next = ptr->next;
     free(ptr);
 }
-void lst_erase(dllist * lst) {
-    if (lst->head == NULL)
-        return;
-    while (lst->head != lst->tail) {
-        lst->head = lst->head->next;
-        free(lst->head->prev);
-    }
-    free(lst->head);
-    lst->head = NULL;
-    lst->tail = NULL;
-}
+
+
+
 lnode *get_first_node(dllist * lst) {
     if (lst->head == NULL)
         return NULL;
     return lst->head;
 }
-lnode *get_last_node(list * lst) {
+lnode *get_last_node(dllist * lst) {
     if (lst->tail == NULL)
         return NULL;
     return lst->tail;

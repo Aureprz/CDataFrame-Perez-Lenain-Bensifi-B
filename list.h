@@ -6,7 +6,7 @@
 
 typedef struct lnode_
 {
-    COLUMN* data;
+    COLUMN* ln_data;
     struct lnode *prev;
     struct lnode *next;
 

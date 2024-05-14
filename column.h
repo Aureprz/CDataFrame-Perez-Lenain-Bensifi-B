@@ -29,7 +29,7 @@ typedef struct COLUMN{
     //-1 : invalid index
     // 1 : valid index
     int valid_index;
-    // direction de tri Ascendant ou Déscendant
+    // sorting direction : either Ascending or Descending
     // 0 : ASC
     // 1 : DESC
     int sort_dir;
