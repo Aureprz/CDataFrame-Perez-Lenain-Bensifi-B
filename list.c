@@ -16,17 +16,17 @@ lnode *lst_create_lnode(void *dat) {
     ptmp->prev = NULL;
     return ptmp;
 }
-list *lst_create_list() {
-    list *lst = (list *) malloc(sizeof(list));
+dllist *lst_create_list() {
+    dllist *lst = (dllist *) malloc(sizeof(dllist));
     lst->head = NULL;
     lst->tail = NULL;
     return lst;
 }
-void lst_delete_list(list * lst) {
+void lst_delete_list(dllist * lst) {
     lst_erase(lst);
     free(lst);
 }
-void lst_insert_head(list * lst, lnode * pnew) {
+void lst_insert_head(dllist * lst, lnode * pnew) {
     if (lst->head == NULL) {
         lst->head = pnew;
         lst->tail = pnew;
@@ -37,7 +37,7 @@ void lst_insert_head(list * lst, lnode * pnew) {
     lst->head = pnew;
     pnew->next->prev = pnew;
 }
-void lst_insert_tail(list * lst, lnode * pnew) {
+void lst_insert_tail(dllist * lst, lnode * pnew) {
     if (lst->head == NULL) {
         lst->head = pnew;
         lst->tail = pnew;
@@ -48,7 +48,7 @@ void lst_insert_tail(list * lst, lnode * pnew) {
     lst->tail = pnew;
     pnew->prev->next = pnew;
 }
-void lst_insert_after(list * lst, lnode * pnew, lnode * ptr) {
+void lst_insert_after(dllist * lst, lnode * pnew, lnode * ptr) {
     if (lst->head == NULL) {
         lst->head = pnew;
         lst->tail = pnew;
@@ -63,7 +63,7 @@ void lst_insert_after(list * lst, lnode * pnew, lnode * ptr) {
         pnew->prev->next = pnew;
     }
 }
-void lst_delete_head(list * lst) {
+void lst_delete_head(dllist * lst) {
     if (lst->head->next == NULL) {
         free(lst->head);
         lst->head = NULL;
@@ -74,7 +74,7 @@ void lst_delete_head(list * lst) {
     free(lst->head->prev);
     lst->head->prev = NULL;
 }
-void lst_delete_tail(list * lst) {
+void lst_delete_tail(dllist * lst) {
     if (lst->tail->prev == NULL) {
         free(lst->tail);
         lst->head = NULL;
@@ -85,7 +85,7 @@ void lst_delete_tail(list * lst) {
     free(lst->tail->next);
     lst->tail->next = NULL;
 }
-void lst_delete_lnode(list * lst, lnode * ptr) {
+void lst_delete_lnode(dllist * lst, lnode * ptr) {
     if (ptr == NULL)
         return;
     if (ptr == lst->head) {
@@ -100,7 +100,7 @@ void lst_delete_lnode(list * lst, lnode * ptr) {
     ptr->prev->next = ptr->next;
     free(ptr);
 }
-void lst_erase(list * lst) {
+void lst_erase(dllist * lst) {
     if (lst->head == NULL)
         return;
     while (lst->head != lst->tail) {
@@ -111,7 +111,7 @@ void lst_erase(list * lst) {
     lst->head = NULL;
     lst->tail = NULL;
 }
-lnode *get_first_node(list * lst) {
+lnode *get_first_node(dllist * lst) {
     if (lst->head == NULL)
         return NULL;
     return lst->head;
@@ -121,12 +121,12 @@ lnode *get_last_node(list * lst) {
         return NULL;
     return lst->tail;
 }
-lnode *get_next_node(list * lst, lnode * lnode) {
+lnode *get_next_node(dllist * lst, lnode * lnode) {
     if (lnode == NULL)
         return NULL;
     return lnode->next;
 }
-void *get_previous_elem(list * lst, lnode * lnode) {
+void *get_previous_elem(dllist * lst, lnode * lnode) {
     if (lnode == NULL)
         return NULL;
     return lnode->prev;

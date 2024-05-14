@@ -10,7 +10,7 @@
  * @brief:  Shows the totality of the CDataFrame
  * @param1: Pointer to the CDataFrame
  */
-void show_cdataframe(list* dataframe);
+void show_cdataframe(dllist* dataframe);
 
 /**
  * @brief:  Shows part of the lines of the CDataFrame
@@ -18,7 +18,7 @@ void show_cdataframe(list* dataframe);
  * @param2: number of the first line
  * @param3: number of the last line
  */
-void showline_cdataframe(list* dataframe, int start, int end);
+void showline_cdataframe(dllist* dataframe, int start, int end);
 
 /**
  * @brief:  Shows part of the column of the CDataFrame
@@ -26,27 +26,27 @@ void showline_cdataframe(list* dataframe, int start, int end);
  * @param2: number of the first line
  * @param3: number of the last line
  */
-void showcolumn_cdataframe(list* dataframe, int start, int end);
+void showcolumn_cdataframe(dllist* dataframe, int start, int end);
 
 /**
  * @brief:  Shows names of the columns of the CDataFrame
  * @param1: Pointer to the CDataFrame
  */
-void shownamecolumn_cdataframe(list* dataframe);
+void shownamecolumn_cdataframe(dllist* dataframe);
 
 /**
  * @brief:  Shows number of lines of the CDataFrame
  * @param1: Pointer to the CDataFrame
  * @return: number of lines
  */
-int shownumline_cdataframe(list* dataframe);
+int shownumline_cdataframe(dllist* dataframe);
 
 /**
  * @brief:  Shows number of columns of the CDataFrame
  * @param1: Pointer to the CDataFrame
  * @return: number of columns
  */
-int shownumcolumn_cdataframe(list* dataframe);
+int shownumcolumn_cdataframe(dllist* dataframe);
 
 /**
  * @brief:  Looks for a value in the CDataFrame
@@ -55,7 +55,7 @@ int shownumcolumn_cdataframe(list* dataframe);
  * @param3: value type
  * @return: 1 if the value exists 0 otherwise
  */
-int cellequal_cdataframe(list* dataframe, COL_TYPE, ENUM_TYPE);
+int cellequal_cdataframe(dllist* dataframe, COL_TYPE, ENUM_TYPE);
 
 /**
  * @brief:  Shows the numbers of cells match with the value in the CDataFrame
@@ -64,7 +64,7 @@ int cellequal_cdataframe(list* dataframe, COL_TYPE, ENUM_TYPE);
  * @param3: value type
  * @return: number of cells equals
  */
-int cellsequal_cdataframe(list* dataframe, COL_TYPE, ENUM_TYPE);
+int cellsequal_cdataframe(dllist* dataframe, COL_TYPE, ENUM_TYPE);
 
 /**
  * @brief:  Shows the numbers of cells superior than the value in the CDataFrame
@@ -73,7 +73,7 @@ int cellsequal_cdataframe(list* dataframe, COL_TYPE, ENUM_TYPE);
  * @param3: value type
  * @return: number of cells superior
  */
-int cellssup_cdataframe(list*, COLUMN* dataframe, COL_TYPE, ENUM_TYPE);
+int cellssup_cdataframe(dllist*, COLUMN* dataframe, COL_TYPE, ENUM_TYPE);
 
 /**
  * @brief:  Shows the numbers of cells inferior than the value in the CDataFrame
@@ -82,7 +82,7 @@ int cellssup_cdataframe(list*, COLUMN* dataframe, COL_TYPE, ENUM_TYPE);
  * @param3: value type
  * @return: number of cells inferior
  */
-int cellsinf_cdataframe(list* dataframe, COL_TYPE, ENUM_TYPE);
+int cellsinf_cdataframe(dllist* dataframe, COL_TYPE, ENUM_TYPE);
 
 /**
  * @brief:  Rename a column in the CDataFrame
@@ -91,7 +91,7 @@ int cellsinf_cdataframe(list* dataframe, COL_TYPE, ENUM_TYPE);
  * @param3: New title
  * @return: 1 if there is no error 0 otherwise
  */
-int renamecolumn_cdataframe(list* dataframe, int index, char* title);
+int renamecolumn_cdataframe(dllist* dataframe, int index, char* title);
 
 
 #endif //CDATAFRAME_PEREZ_LENAIN_BENSIFI_CDATAFRAME_H
