@@ -39,8 +39,14 @@ void update_index(COLUMN *col);
 
 void create_index(COLUMN *col);
 
-unsigned long long int partition(COLUMN* col, int left , int right);
+unsigned int partition(COLUMN* col, unsigned int left , unsigned int right, int sort_dir);
 
-void quicksort(COLUMN* col, int left , int right);
+void quicksort(COLUMN* col, unsigned int left , unsigned int right, int sort_dir);
+
+void swap(unsigned long long int *a, unsigned long long int *b);
+
+int compare_in_col(COLUMN *col, unsigned long long int i , unsigned long long int j);
+
+void insertion_sort(COLUMN *col, int sort_dir);
 
 #endif //CDATAFRAME_PEREZ_LENAIN_BENSIFI_SORT_H

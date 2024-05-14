@@ -16,6 +16,8 @@ COLUMN *create_column(ENUM_TYPE type, char *title){
     col->title = title;
     col->column_type = type;
     col->data = NULL;
+    col->index = NULL;
+    col->valid_index = 0;
     col->max_size = 0;
     col->size = 0;
     return col;

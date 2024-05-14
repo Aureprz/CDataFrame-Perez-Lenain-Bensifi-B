@@ -12,10 +12,6 @@
 #define MAX_SIZE 256
 
 void sort(COLUMN* col, int sort_dir){
-    unsigned long long int k;
-    int j;
-    char str1[MAX_SIZE], str2[MAX_SIZE];
-
     if ((col == NULL) || ((sort_dir != DESC) && (sort_dir != ASC)) || col->data == NULL){
         return;
     }
@@ -25,38 +21,40 @@ void sort(COLUMN* col, int sort_dir){
         col->valid_index = 1;
         return;
     }
-    /*TODO: add sort_dir condition */
     if (col->valid_index == -1){
-        for(int i=2; i< col->size; i++){
-            k = col->index[i];
-            convert_value(col, k, str1, MAX_SIZE);
-            j = i - 1;
-            convert_value(col, col->index[j], str2, MAX_SIZE);
-
-            while((j>0) && (strcmp(str2, str1) > 0)){
-                col->index[j+1] = col->index[j];
-                j--;
-                convert_value(col, col->index[j], str2, MAX_SIZE);
-            }
-            col->index[j+1] = k;
-
-        }
+        insertion_sort(col, sort_dir);
     }
     else{
-        /*TODO: Tri rapide(Quicksort) p25*/
+        quicksort(col, 0, col->size-1, sort_dir);
     }
     col->sort_dir = sort_dir;
     col->valid_index = 1;
     return;
 }
 
-unsigned long long int partition(COLUMN* col, int left , int right){
-    /*TODO partition*/
-    return 1;
+unsigned int partition(COLUMN* col, unsigned int left , unsigned int right, int sort_dir){
+    unsigned long long int pivot = col->index[right];
+    unsigned int i = (left -1), j;
+
+    for(j = left ; j < (right - 1); j++){
+        if(((sort_dir == ASC) && (compare_in_col(col, col->index[j], pivot) <= 0))||
+        ((sort_dir == DESC) && (compare_in_col(col, col->index[j], pivot) >= 0))){
+            i++;
+            swap(&col->index[j], &col->index[i]);
+        }
+    }
+    swap(&col->index[i+1], &col->index[right]);
+
+    return i+1;
 }
 
-void quicksort(COLUMN* col, int left , int right){
-    /*TODO (Quicksort) p25*/
+void quicksort(COLUMN* col, unsigned int left , unsigned int right, int sort_dir){
+    unsigned int pi;
+    if(left < right){
+        pi =  partition(col, left , right, sort_dir);
+        quicksort(col, left , pi -1, sort_dir);
+        quicksort(col, pi + 1, right, sort_dir);
+    }
 }
 
 void create_index(COLUMN *col){
@@ -73,4 +71,96 @@ void create_index(COLUMN *col){
 void erase_index(COLUMN *col){
     free(col->index);
     col->index = NULL;
+}
+
+int compare_in_col(COLUMN *col, unsigned long long int i, unsigned long long int j){
+    int res;
+    switch (col->column_type) {
+
+        case INT:
+            if (*((int*)col->data[i]) > *((int*)col->data[j])){
+                return 1;
+            }
+            if (*((int*)col->data[i]) < *((int*)col->data[j])){
+                return -1;
+            }
+            break;
+        case UINT:
+            if (*((unsigned int*)col->data[i]) > *((unsigned int*)col->data[j])){
+                return 1;
+            }
+            if (*((unsigned int*)col->data[i]) < *((unsigned int*)col->data[j])){
+                return -1;
+            }
+            break;
+
+        case FLOAT:
+            if (*((float*)col->data[i]) > *((float*)col->data[j])){
+                return 1;
+            }
+            if (*((float*)col->data[i]) < *((float*)col->data[j])){
+                return -1;
+            }
+            break;
+
+        case DOUBLE:
+            if (*((double*)col->data[i]) > *((double*)col->data[j])){
+                return 1;
+            }
+            if (*((double*)col->data[i]) < *((double*)col->data[j])){
+                return -1;
+            }
+            break;
+
+        case CHAR:
+            if (*((char*)col->data[i]) > (*((char*)col->data[j]))){
+                return 1;
+            }
+            if (*((char*)col->data[i]) < (*((char*)col->data[j]))){
+                return -1;
+            }
+            break;
+
+        case STRING:
+            res = strcmp((char*)col->data[i], (char*)col->data[j]);
+            if(res>0){
+                return 1;
+            }
+            if(res<0){
+                return -1;
+            }
+            break;
+        default:
+            break;
+    }
+    return 0;
+}
+
+void swap(unsigned long long int *a, unsigned long long int *b){
+    unsigned long long int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void insertion_sort(COLUMN *col, int sort_dir){
+    unsigned long long int k;
+    int j;
+    for(int i=2; i< col->size; i++){
+        k = col->index[i];
+        j = i - 1;
+        if (sort_dir == ASC) {
+            while((j>0) && (compare_in_col(col, k, col->index[j]) > 0)){
+                col->index[j+1] = col->index[j];
+                j--;
+            }
+        }
+        else {
+            while((j > 0) && (compare_in_col(col, k, col->index[j]) < 0)){
+                col->index[j + 1] = col->index[j];
+                j--;
+            }
+        }
+        col->index[j+1] = k;
+
+    }
 }
