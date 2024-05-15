@@ -6,9 +6,9 @@
 
 typedef struct lnode_
 {
-    COLUMN* data;
-    struct lnode_ *prev;
-    struct lnode_ *next;
+    COLUMN* ln_data;
+    struct lnode *prev;
+    struct lnode *next;
 
 }lnode;
 
@@ -74,6 +74,14 @@ int view(dllist *list);
  */
 int clear(dllist *list);
 
+/**
+ * @brief: Sort the CDataFrame in ascending or descending order by the number of element per column
+ * @param1: Pointer to the CDataFrame to sort
+ * @param2: If 0 sort in ascending order \n
+ *        : if 1 sort in descending order
+ * @return: 1 if the CDataFrame is correctly sorted 0 otherwise
+ */
+int sort(dllist *list, int *ascending);
 
 /**
  * @brief: Access a to a specific element in a CDataFrame by its index
@@ -86,7 +94,5 @@ int clear(dllist *list);
  * @return: 1 if the CDataFrame is correctly sorted 0 otherwise
  */
 int view_element(dllist *list, int column, int line, int method, COL_TYPE *value);
-
-void lst_erase(dllist * lst);
 
 #endif //CDATAFRAME_PEREZ_LENAIN_BENSIFI_LIST_H

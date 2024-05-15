@@ -4,7 +4,12 @@
 #include "column.h"
 #include "list.h"
 
+/**
+ * @param1:  Possibles types of the soon to be CDataFrame
+ * @param2: Size of the CDataFrame
+ */
 
+CDATAFRAME* create_cdataframe(ENUM_TYPE* cdftype, int size);
 
 /**
  * @brief:  Shows the totality of the CDataFrame
