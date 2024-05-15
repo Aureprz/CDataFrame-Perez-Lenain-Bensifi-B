@@ -7,8 +7,8 @@
 typedef struct lnode_
 {
     COLUMN* ln_data;
-    struct lnode *prev;
-    struct lnode *next;
+    struct lnode_ *prev;
+    struct lnode_ *next;
 
 }lnode;
 
