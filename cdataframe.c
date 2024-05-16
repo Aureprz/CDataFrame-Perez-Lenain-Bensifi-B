@@ -34,3 +34,71 @@ CDATAFRAME* create_cdf_user() {
     //TODO LE REMPLISSAGE DES COLONES
     return cdf;
 }
+
+
+int cellexist_cdataframe(CDATAFRAME* dataframe, void* value){
+    int cpt = 0;
+    if ((dataframe == NULL) || (dataframe->size == 0)){
+        return cpt;
+    }
+    lnode* current = dataframe->list->head;
+
+    while (current->next != NULL){
+        cpt += exist_col(current->data, value);
+        if (cpt> 0){
+            return cpt;
+        }
+        current = get_next_node(dataframe->list, current);
+    }
+    cpt += exist_col(current->data, value);
+    return cpt;
+}
+
+
+int cellsequal_cdataframe(CDATAFRAME* dataframe, void* value){
+    int cpt = 0;
+    if ((dataframe == NULL) || (dataframe->size == 0)){
+        return cpt;
+    }
+    lnode* current = dataframe->list->head;
+
+    while (current->next != NULL){
+        cpt += cellsequal_col(current->data, value);
+        current = get_next_node(dataframe->list, current);
+    }
+    cpt += cellsequal_col(current->data, value);
+    return cpt;
+}
+
+
+
+int cellssup_cdataframe(CDATAFRAME* dataframe, void* value){
+    int cpt = 0;
+    if ((dataframe == NULL) || (dataframe->size == 0)){
+        return cpt;
+    }
+    lnode* current = dataframe->list->head;
+
+    while (current->next != NULL){
+        cpt += cellssup_col(current->data, value);
+        current = get_next_node(dataframe->list, current);
+    }
+    cpt += cellssup_col(current->data, value);
+    return cpt;
+}
+
+
+int cellsinf_cdataframe(CDATAFRAME* dataframe, void* value){
+    int cpt = 0;
+    if ((dataframe == NULL) || (dataframe->size == 0)){
+        return cpt;
+    }
+    lnode* current = dataframe->list->head;
+
+    while (current->next != NULL){
+        cpt += cellsinf_col(current->data, value);
+        current = get_next_node(dataframe->list, current);
+    }
+    cpt += cellsinf_col(current->data, value);
+    return cpt;
+}
