@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "list.h"
+#include <string.h>
 
 #define MAX_SIZE 32
 
@@ -54,6 +55,22 @@ CDATAFRAME* create_cdf_user(){
 
 
 // 3. Opérations usuelles
+
+void rename_col(CDATAFRAME* cdf, char* title_replaced){
+    lnode* current = cdf->list.head;
+    COLUMN* col = NULL;
+    int i;
+    char* str = (char*) malloc(sizeof(char));
+    printf("Choisissez un nouveau nom de colonne : \n");
+    scanf(" %s", str);
+    for (i = 0 ; i < cdf->size ; i++){
+        col = current->data;
+        if (strcmp(col->title, title_replaced) == 0){ // Compare les 2 chaînes de caractères
+            col->title = str;
+        }
+    }
+
+}
 
 void print_col_names(CDATAFRAME* cdf, unsigned int size){
     lnode* current = cdf->list.head;
