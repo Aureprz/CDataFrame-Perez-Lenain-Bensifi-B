@@ -1,7 +1,3 @@
-//
-// Created by aurel on 13/05/2024.
-//
-
 #include "sort.h"
 #include "column.h"
 
@@ -34,7 +30,7 @@ void sort(COLUMN* col, int sort_dir){
 }
 
 unsigned int partition(COLUMN* col, unsigned int left , unsigned int right, int sort_dir){
-    unsigned long long int pivot = col->index[right];
+    unsigned long long int pivot =  col->index[right];
     unsigned int i = left-1, j;
 
     for(j = left ; j < right; j++){

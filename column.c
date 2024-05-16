@@ -1,6 +1,4 @@
-
-#define MAX_SIZE 512
-
+#define MAX_SIZE 32
 #include "sort.h"
 #include "column.h"
 #include <stdio.h>
@@ -18,7 +16,7 @@ COLUMN *create_column(ENUM_TYPE type, char *title){
     col->data = NULL;
     col->index = NULL;
     col->valid_index = 0;
-    col->max_size = 0;
+    col->max_size = -20;
     col->size = 0;
     col->sort_dir = 0;
     return col;
@@ -28,16 +26,18 @@ COLUMN *create_col_user(){
     char title[MAX_SIZE];
     int i=0;
     ENUM_TYPE type;
-    printf("Veuiller saisir le titre de la colonne:\n");
+    printf("Veuillez saisir le titre de la colonne : \n");
     scanf(" %s", title);
     do {
-        printf("Veuiller saisir le type de la colone:\n");
+        printf("Veuillez saisir le type de la colonne : \n");
         printf("NULLVAL [1] , UINT[2], INT[3], CHAR[4], FLOAT[5], DOUBLE[6], STRING[7], STRUCTURE[8]\n");
         scanf(" %d", &i);
     } while ((i <=0) || (i>8));
     type = i;
     return create_column(type, title);
 }
+
+
 
 
 int insert_user_val(COLUMN *col){
