@@ -24,6 +24,65 @@ COLUMN *create_column(ENUM_TYPE type, char *title){
     return col;
 }
 
+COLUMN *create_col_user(){
+    char title[MAX_SIZE];
+    int i=0;
+    ENUM_TYPE type;
+    printf("Veuiller saisir le titre de la colonne:\n");
+    scanf(" %s", title);
+    do {
+        printf("Veuiller saisir le type de la colone:\n");
+        printf("NULLVAL [1] , UINT[2], INT[3], CHAR[4], FLOAT[5], DOUBLE[6], STRING[7], STRUCTURE[8]\n");
+        scanf(" %d", &i);
+    } while ((i <=0) || (i>8));
+    type = i;
+    return create_column(type, title);
+}
+
+
+int insert_user_val(COLUMN *col){
+    unsigned int vuint;
+    int vint;
+    float vfloat;
+    double vdouble;
+    char vchar;
+    char vstr[MAX_SIZE];
+
+    switch (col->column_type) {
+        case UINT:
+            printf("Veuillez entrer un entier positive:\n");
+            scanf("%d", &vuint);
+            insert_value(col,&vuint);
+            break;
+        case INT:
+            printf("Veuillez entrer un entier:\n");
+            scanf("%d",&vint);
+            insert_value(col,&vint);
+            break;
+        case CHAR:
+            printf("Veuillez entrer un caractère:\n");
+            scanf("%c",&vchar);
+            insert_value(col,&vchar);
+            break;
+        case FLOAT:
+            printf("Veuillez entrer une valeur réel:\n");
+            scanf("%f",&vfloat);
+            insert_value(col,&vfloat);
+            break;
+        case DOUBLE:
+            printf("Veuillez entrer une valeur réel:\n");
+            scanf("%lf",&vdouble);
+            insert_value(col,&vdouble);
+            break;
+        case STRING:
+            printf("Veuillez entrer une chaine de caractères:\n");
+            scanf("%s",vstr);
+            insert_value(col,vstr);
+            break;
+        default:
+            printf("ERROR");
+    }
+}
 
 int insert_value(COLUMN *col, void *value){
     if (col == NULL){

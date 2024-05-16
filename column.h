@@ -120,5 +120,8 @@ int cellsinf_col(COLUMN* col, void *value);
 */
 void print_col_by_index(COLUMN *col);
 
+COLUMN *create_col_user();
+
+int insert_user_val(COLUMN *col);
 
 #endif //CDATAFRAME_PEREZ_LENAIN_BENSIFI_COLUMN_H

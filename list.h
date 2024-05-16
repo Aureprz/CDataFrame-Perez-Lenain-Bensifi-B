@@ -13,80 +13,66 @@ typedef struct lnode_
 }lnode;
 
 
-typedef struct dllist
-{
-    int size;
+typedef struct dllist_{
     lnode *head;
     lnode *tail;
 }dllist;
 
-typedef dllist CDATAFRAME;
-
-
 /**
- * @brief: Initialize the CDataFrame
- * @param1: Pointer to the CDataFrame to create
- * @return: 1 if the CDataFrame is correctly created 0 otherwise
- */
-int init(dllist *list);
-
+* création d'un noeud
+*/
+lnode *lst_create_lnode(void *dat);
 /**
- * @brief: Adds an column to the first position of the CDataFrame
- * @param1: Pointer to the CDataFrame to edit
- * @param2: Value to add to the CDataFrame
- * @return: 1 if the column is correctly inserted 0 otherwise
- */
-int add_first(dllist *list, COLUMN *column);
-
+* crée la liste et retourne un pointeur sur cette dernière
+*/
+dllist *lst_create_list();
 /**
- * @brief: Adds an column to the last position of the CDataFrame
- * @param1: Pointer to the CDataFrame to edit
- * @param2: Value to add to the CDataFrame
- * @return: 1 if the column is correctly inserted 0 otherwise
- */
-int add_last(dllist *list, COLUMN *column);
-
+* supprimer la liste
+*/
+void lst_delete_list(dllist * lst);
 /**
- * @brief: Remove the first column of the CDataFrame
- * @param1: Pointer to the CDataFrame to edit
- * @return: 1 if the value is correctly removed 0 otherwise
- */
-int remove_first(dllist *list);
-
+* Insère pnew au début de la liste lst
+*/
+void lst_insert_head(dllist * lst, lnode * pnew);
 /**
- * @brief: Remove the last column of the CDataFrame
- * @param1: Pointer to the CDataFrame to edit
- * @return: 1 if the value is correctly removed 0 otherwise
- */
-int remove_last(dllist *list);
-
+* Insère pnew à la fin de la liste lst
+*/
+void lst_insert_tail(dllist * lst, lnode * pnew);
 /**
- * @brief: Shows the entire CDataFrame
- * @param1: Pointer to the CDataFrame to show
- * @return: 1 if there is no error 0 otherwise
- */
-int view(dllist *list);
-
+* Insère l'élément pnew juste après ptr dans la liste lst
+*/
+void lst_insert_after(dllist * lst, lnode * pnew, lnode * ptr);
 /**
- * @brief: Clear the CDataFrame
- * @param1: Pointer to the CDataFrame to clear
- * @return: 1 if the CDataFrame is correctly cleared 0 otherwise
- */
-int clear(dllist *list);
-
-
+* Supprime le premier élément de la liste
+*/
+void lst_delete_head(dllist * lst);
 /**
- * @brief: Access a to a specific element in a CDataFrame by its index
- * @param1: Pointer to the CDataFrame
- * @param2: the column where the element is located
- * @param3: the line where the element is located
- * @param4: If 0 starts at the beginning \n
- *        : If 1 start at the end
- * @param5: Pointer that will point to the element
- * @return: 1 if the CDataFrame is correctly sorted 0 otherwise
- */
-int view_element(dllist *list, int column, int line, int method, COL_TYPE *value);
-
+* Supprime le dernier élément de la liste
+*/
+void lst_delete_tail(dllist * lst);
+/**
+* Supprime le lnode pointé par ptr
+*/
+void lst_delete_lnode(dllist * lst, lnode * ptr);
+/**
+* Supprime tous les éléments de la liste lst
+*/
 void lst_erase(dllist * lst);
+/**
+* retourne le premier node s'il existe sinon NULL
+*/
+lnode *get_first_node(dllist * lst);
+/**
+* retourne le denier node s'il existe sinon NULL
+*/
+lnode *get_last_node(dllist * lst);
+/**
+* retourne le node suivant
+*/
+lnode *get_next_node(dllist * lst, lnode * lnode);
+/**
+* retourne le node precedent
+*/
+void *get_previous_elem(dllist * lst, lnode * lnode);
 
 #endif //CDATAFRAME_PEREZ_LENAIN_BENSIFI_LIST_H
