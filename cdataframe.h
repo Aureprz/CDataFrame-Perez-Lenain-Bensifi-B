@@ -11,6 +11,19 @@ typedef struct cdataframe{
     dllist *list;
 }CDATAFRAME;
 
+typedef struct cdataframe{
+    ENUM_TYPE cdataframe_type; // liste des types
+    unsigned int nb_col;
+    dllist list;
+}CDATAFRAME;
+
+/**
+
+@param1:  Possibles types of the soon to be CDataFrame
+@param2: Size of the CDataFrame
+*/
+
+CDATAFRAME* create_empty_cdataframe(ENUM_TYPE* cdftype,unsigned int size);
 /**
 * Création d'un dataframe
 */
