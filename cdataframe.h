@@ -4,12 +4,13 @@
 #include "column.h"
 #include "list.h"
 
-
-
 typedef struct cdataframe{
-    ENUM_TYPE cdataframe_type; // liste des types
-    unsigned int size;
-    dllist list;
+
+    ENUM_TYPE* list_type;
+    int size;
+    dllist *list;
+    unsigned int nb_line;
+
 }CDATAFRAME;
 
 /**
@@ -19,6 +20,10 @@ typedef struct cdataframe{
 */
 
 CDATAFRAME* create_empty_cdataframe(ENUM_TYPE* cdftype,unsigned int size);
+/**
+* Création d'un dataframe
+*/
+CDATAFRAME *create_cdataframe(ENUM_TYPE *cdftype, int size);
 
 CDATAFRAME* create_cdf_user();
 
@@ -28,7 +33,7 @@ void print_col_names(CDATAFRAME* cdf, unsigned int size);
  * @brief:  Shows the totality of the CDataFrame
  * @param1: Pointer to the CDataFrame
  */
-void show_cdataframe(dllist* dataframe);
+void show_cdataframe(CDATAFRAME* dataframe);
 
 /**
  * @brief:  Shows part of the lines of the CDataFrame
@@ -36,7 +41,7 @@ void show_cdataframe(dllist* dataframe);
  * @param2: number of the first line
  * @param3: number of the last line
  */
-void showline_cdataframe(dllist* dataframe, int start, int end);
+void showline_cdataframe(CDATAFRAME* dataframe, int start, int end);
 
 /**
  * @brief:  Shows part of the column of the CDataFrame
@@ -44,27 +49,27 @@ void showline_cdataframe(dllist* dataframe, int start, int end);
  * @param2: number of the first line
  * @param3: number of the last line
  */
-void showcolumn_cdataframe(dllist* dataframe, int start, int end);
+void showcolumn_cdataframe(CDATAFRAME* dataframe, int start, int end);
 
 /**
  * @brief:  Shows names of the columns of the CDataFrame
  * @param1: Pointer to the CDataFrame
  */
-void shownamecolumn_cdataframe(dllist* dataframe);
+void shownamecolumn_cdataframe(CDATAFRAME* dataframe);
 
 /**
  * @brief:  Shows number of lines of the CDataFrame
  * @param1: Pointer to the CDataFrame
  * @return: number of lines
  */
-int shownumline_cdataframe(dllist* dataframe);
+int shownumline_cdataframe(CDATAFRAME* dataframe);
 
 /**
  * @brief:  Shows number of columns of the CDataFrame
  * @param1: Pointer to the CDataFrame
  * @return: number of columns
  */
-int shownumcolumn_cdataframe(dllist* dataframe);
+int shownumcolumn_cdataframe(CDATAFRAME* dataframe);
 
 /**
  * @brief:  Looks for a value in the CDataFrame
@@ -73,7 +78,7 @@ int shownumcolumn_cdataframe(dllist* dataframe);
  * @param3: value type
  * @return: 1 if the value exists 0 otherwise
  */
-int cellequal_cdataframe(dllist* dataframe, COL_TYPE, ENUM_TYPE);
+int cellexist_cdataframe(CDATAFRAME* dataframe, void* value);
 
 /**
  * @brief:  Shows the numbers of cells match with the value in the CDataFrame
@@ -82,7 +87,7 @@ int cellequal_cdataframe(dllist* dataframe, COL_TYPE, ENUM_TYPE);
  * @param3: value type
  * @return: number of cells equals
  */
-int cellsequal_cdataframe(dllist* dataframe, COL_TYPE, ENUM_TYPE);
+int cellsequal_cdataframe(CDATAFRAME* dataframe, void* value);
 
 /**
  * @brief:  Shows the numbers of cells superior than the value in the CDataFrame
@@ -91,7 +96,7 @@ int cellsequal_cdataframe(dllist* dataframe, COL_TYPE, ENUM_TYPE);
  * @param3: value type
  * @return: number of cells superior
  */
-int cellssup_cdataframe(dllist*, COLUMN* dataframe, COL_TYPE, ENUM_TYPE);
+int cellssup_cdataframe(CDATAFRAME* dataframe, void* value);
 
 /**
  * @brief:  Shows the numbers of cells inferior than the value in the CDataFrame
@@ -100,7 +105,7 @@ int cellssup_cdataframe(dllist*, COLUMN* dataframe, COL_TYPE, ENUM_TYPE);
  * @param3: value type
  * @return: number of cells inferior
  */
-int cellsinf_cdataframe(dllist* dataframe, COL_TYPE, ENUM_TYPE);
+int cellsinf_cdataframe(CDATAFRAME* dataframe, void* value);
 
 /**
  * @brief:  Rename a column in the CDataFrame
@@ -109,7 +114,7 @@ int cellsinf_cdataframe(dllist* dataframe, COL_TYPE, ENUM_TYPE);
  * @param3: New title
  * @return: 1 if there is no error 0 otherwise
  */
-int renamecolumn_cdataframe(dllist* dataframe, int index, char* title);
+int renamecolumn_cdataframe(CDATAFRAME* dataframe, int index, char* title);
 
 
 #endif //CDATAFRAME_PEREZ_LENAIN_BENSIFI_CDATAFRAME_H

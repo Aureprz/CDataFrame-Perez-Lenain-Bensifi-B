@@ -187,12 +187,20 @@ void convert_value(COLUMN *col, unsigned long long int i, char *str, int size){
         }
 }
 void print_col(COLUMN* col){
-    char str[MAX_SIZE];
     unsigned long long int i;
     for (i = 0; i < col->size; i++){
-        convert_value(col, i, str, MAX_SIZE);
-        printf("[%llu] %s\n", i, str);
+        print_val_in_col(col, i);
     }
+}
+
+void print_val_in_col(COLUMN* col , unsigned long long int index){
+    if (col == NULL ||index >= col->size){
+        printf("Index incorrect ");
+        return;
+    }
+    char str[MAX_SIZE];
+    convert_value(col, index, str, MAX_SIZE);
+    printf("[%llu] %-20.20s\n", index, str);
 }
 
 int exist_col(COLUMN* col, void *value){
@@ -378,4 +386,5 @@ int cellsinf_col(COLUMN* col, void *value){
     }
     return cpt;
 }
+
 

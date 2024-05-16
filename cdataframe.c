@@ -10,8 +10,8 @@
 
 CDATAFRAME *create_cdataframe(ENUM_TYPE *cdftype, int size){
     CDATAFRAME  *cdf = (CDATAFRAME*) malloc(sizeof(CDATAFRAME));
-    cdf->list = *lst_create_list();
-    cdf->cdataframe_type = *cdftype;
+    cdf->list = lst_create_list();
+    cdf->list_type =  cdftype;
     cdf->size = size;
     return cdf;
 }
@@ -43,18 +43,49 @@ CDATAFRAME* create_cdf_user(){
     for ( i = 0 ; i < size ; i++){
         printf("Choisissez un titre pour la colonne %d : ",i+1);
         scanf(" %s", *title);
-        col = create_column(cdf->cdataframe_type,*title);
+        col = create_column(*cdf->list_type,*title);
         newnode = lst_create_lnode(col);
-        lst_insert_tail(&cdf->list, newnode);
+        lst_insert_tail(cdf->list, newnode);
     }
     return cdf;
 }
 
-// 2. Affichage
+
+int cellexist_cdataframe(CDATAFRAME* dataframe, void* value){
+    int cpt = 0;
+    if ((dataframe == NULL) || (dataframe->size == 0)){
+        return cpt;
+    }
+    lnode* current = dataframe->list->head;
+
+    while (current->next != NULL){
+        cpt += exist_col(current->data, value);
+        if (cpt> 0){
+            return cpt;
+        }
+        current = get_next_node(dataframe->list, current);
+    }
+    cpt += exist_col(current->data, value);
+    return cpt;
+}
 
 
+int cellsequal_cdataframe(CDATAFRAME* dataframe, void* value){
+    int cpt = 0;
+    if ((dataframe == NULL) || (dataframe->size == 0)){
+        return cpt;
+    }
+    lnode* current = dataframe->list->head;
 
-// 3. Opérations usuelles
+    while (current->next != NULL){
+        cpt += cellsequal_col(current->data, value);
+        current = get_next_node(dataframe->list, current);
+    }
+    cpt += cellsequal_col(current->data, value);
+    return cpt;
+}
+
+
 
 void rename_col(CDATAFRAME* cdf, char* title_replaced){
     lnode* current = cdf->list.head;
@@ -70,6 +101,19 @@ void rename_col(CDATAFRAME* cdf, char* title_replaced){
         }
     }
 
+
+int cellsinf_cdataframe(CDATAFRAME* dataframe, void* value){
+    int cpt = 0;
+    if ((dataframe == NULL) || (dataframe->size == 0)){
+        return cpt;
+    }
+    lnode* current =  get_first_node(dataframe->list);
+    if (current == NULL){
+        return cpt;
+    }
+    while (current->next != NULL){
+        cpt += cellsinf_col(current->data, value);
+        current = get_next_node(dataframe->list, current);
 }
 
 void print_col_names(CDATAFRAME* cdf, unsigned int size){
@@ -81,4 +125,31 @@ void print_col_names(CDATAFRAME* cdf, unsigned int size){
         printf(" %s",col->title);
         current = current->next;
     }
+}
+
+void show_cdataframe(CDATAFRAME* dataframe){
+    if ((dataframe == NULL) || (dataframe->size == 0)){
+        return;
+
+    }
+    lnode* current =  get_first_node(dataframe->list);
+    if (current == NULL){
+        printf("Dataframe vide");
+        return;
+    }
+    while (current->next != NULL){
+        //TODO: cree fonction afficher afficher_nom(col*)
+        current->data;
+        current = get_next_node(dataframe->list, current);
+    }
+
+    for(unsigned int i =0; i < dataframe->nb_line; i++){
+        current =  get_first_node(dataframe->list);
+        while (current->next != NULL){
+            print_val_in_col(current->data, i);
+            current = get_next_node(dataframe->list, current);
+        }
+    }
+    printf("\n");
+
 }
