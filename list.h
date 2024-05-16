@@ -20,7 +20,7 @@ typedef struct dllist
     lnode *tail;
 }dllist;
 
-typedef dllist CDATAFRAME;
+
 
 
 /**
@@ -88,5 +88,21 @@ int clear(dllist *list);
 int view_element(dllist *list, int column, int line, int method, COL_TYPE *value);
 
 void lst_erase(dllist * lst);
+
+lnode *lst_create_lnode(void *dat);
+dllist *lst_create_list();
+void lst_delete_list(dllist * lst);
+void lst_insert_head(dllist * lst, lnode * pnew);
+void lst_insert_tail(dllist * lst, lnode * pnew);
+void lst_insert_after(dllist * lst, lnode * pnew, lnode * ptr);
+void lst_delete_head(dllist * lst);
+void lst_delete_tail(dllist * lst);
+void lst_delete_lnode(dllist * lst, lnode * ptr);
+void lst_erase(dllist * lst);
+lnode *get_first_node(dllist * lst);
+lnode *get_last_node(dllist * lst);
+lnode *get_next_node(dllist * lst, lnode * lnode);
+void *get_previous_elem(dllist * lst, lnode * lnode);
+
 
 #endif //CDATAFRAME_PEREZ_LENAIN_BENSIFI_LIST_H

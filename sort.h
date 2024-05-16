@@ -49,4 +49,7 @@ int compare_in_col(COLUMN *col, unsigned long long int i , unsigned long long in
 
 void insertion_sort(COLUMN *col, int sort_dir);
 
+int compare_val_in_col(COLUMN *col, unsigned long long int i, void* val);
+
+
 #endif //CDATAFRAME_PEREZ_LENAIN_BENSIFI_SORT_H
