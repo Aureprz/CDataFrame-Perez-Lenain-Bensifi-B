@@ -144,6 +144,17 @@ int insert_value(COLUMN *col, void *value){
     return 1;
 }
 
+void delete_value_column(COLUMN *col, int location){
+    int i;
+    if (col == NULL || location <= 0){
+        return;
+    }
+    for (i = location - 1 ; i < col->size ; i++){
+        col->data[i] = col->data[i+1];
+    }
+    col->size--;
+}
+
 void delete_column(COLUMN **col){
     for (unsigned int i=0; i< (*col)->size; i++){
         free((*col)->data[i]);

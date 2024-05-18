@@ -53,6 +53,13 @@ COLUMN *create_column(ENUM_TYPE type, char *title);
 */
 int insert_value(COLUMN *col, void *value);
 
+/**
+ * @brief: Delete a value in the column
+ * @param1: Column
+ * @param2: Position of the value the user wants to get rid of within the data column
+ */
+void delete_value_column(COLUMN *col, int location);
+
 
 /**
 * @brief: Free the space allocated by a column

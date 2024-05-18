@@ -20,20 +20,41 @@ typedef struct cdataframe{
 */
 
 CDATAFRAME* create_empty_cdataframe(ENUM_TYPE* cdftype,unsigned int size);
-/**
-* Création d'un dataframe
-*/
-CDATAFRAME *create_cdataframe(ENUM_TYPE *cdftype, int size);
 
+
+/**
+   * User gets to choose the parameters for his soon-to be Dataframe
+*/
 CDATAFRAME* create_cdf_user();
 
-void print_col_names(CDATAFRAME* cdf, unsigned int size);
+/**
+ * @brief: Create by itself the Dataframe
+ * @param1: Dataframe type
+ * @param2: Number of columns in the Dataframe
+ */
+
+CDATAFRAME *create_cdataframe(ENUM_TYPE *cdftype, int size);
+
+/**
+ * @brief: Printout each column name
+ * @param: Dataframe
+ */
+
+void print_col_names(CDATAFRAME* cdf);
 
 /**
  * @brief:  Shows the totality of the CDataFrame
  * @param1: Pointer to the CDataFrame
  */
 void show_cdataframe(CDATAFRAME* dataframe);
+
+/**
+ * @brief: Replace a value within the Dataframe
+ * @param1: Dataframe
+ * @param2: The row location in which the user wants to change the value
+ * @param2: The column location in which the user wants to swap the value
+ */
+void replace_value_cdf(CDATAFRAME *cdf, int row_location, int col_location);
 
 /**
  * @brief:  Shows part of the lines of the CDataFrame
@@ -115,6 +136,13 @@ int cellsinf_cdataframe(CDATAFRAME* dataframe, void* value);
  * @return: 1 if there is no error 0 otherwise
  */
 int renamecolumn_cdataframe(CDATAFRAME* dataframe, int index, char* title);
+
+/**
+ * @brief: Delete a selected line within the Dataframe
+ * @param1: Dataframe
+ * @param2: Position of this line in the Dataframe
+ */
+void delete_cdf_line(CDATAFRAME *cdf, int location);
 
 
 #endif //CDATAFRAME_PEREZ_LENAIN_BENSIFI_CDATAFRAME_H
