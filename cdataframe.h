@@ -142,7 +142,16 @@ int renamecolumn_cdataframe(CDATAFRAME* dataframe, int index, char* title);
  * @param1: Dataframe
  * @param2: Position of this line in the Dataframe
  */
+
+void rename_col(CDATAFRAME* cdf, char* title_replaced);
+
+void delete_column_cdf(CDATAFRAME *cdf, char *col_name);
+
 void delete_cdf_line(CDATAFRAME *cdf, int location);
+
+int column_number(CDATAFRAME* cdf);
+
+int line_number(CDATAFRAME* cdf);
 
 
 #endif //CDATAFRAME_PEREZ_LENAIN_BENSIFI_CDATAFRAME_H

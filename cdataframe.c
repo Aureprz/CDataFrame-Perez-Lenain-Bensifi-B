@@ -87,7 +87,7 @@ int cellsequal_cdataframe(CDATAFRAME* dataframe, void* value){
 
 
 
-void rename_col(CDATAFRAME* cdf, char* title_replaced) {
+void rename_col(CDATAFRAME* cdf, char* title_replaced){
     lnode *current = cdf->list->head;
     COLUMN *col = NULL;
     int i;
@@ -186,6 +186,31 @@ void delete_cdf_line(CDATAFRAME *cdf, int position){
         delete_value_column(node->data,position);
         node = node->next;
     }
+}
+
+int column_number(CDATAFRAME* cdf){
+    int nb_col;
+    int i;
+    int cpt=0;
+    lnode* current = cdf->list->head;
+    char* title = current->data->title;
+    while (current->next != NULL){
+        if (strlen(title) != 0){
+            cpt++;
+            current = current->next;
+        }
+    }
+    return cpt;
+}
+
+int line_number(CDATAFRAME* cdf){
+    int i;
+    int cpt=0;
+    COLUMN* col = cdf->list->head->data;
+    for (i = 0 ; i < col->size ; i++){
+        cpt++;
+    }
+    return cpt;
 }
 
 void replace_value_cdf(CDATAFRAME *cdf, int row_location, int col_location){
