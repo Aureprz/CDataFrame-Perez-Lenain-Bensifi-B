@@ -50,33 +50,33 @@ int insert_user_val(COLUMN *col){
 
     switch (col->column_type) {
         case UINT:
-            printf("Veuillez entrer un entier positive:\n");
+            printf("Veuillez entrer un entier positif : \n");
             scanf("%d", &vuint);
             insert_value(col,&vuint);
             break;
         case INT:
-            printf("Veuillez entrer un entier:\n");
+            printf("Veuillez entrer un entier : \n");
             scanf("%d",&vint);
             insert_value(col,&vint);
             break;
         case CHAR:
-            printf("Veuillez entrer un caractère:\n");
+            printf("Veuillez entrer un caractère : \n");
             scanf("%c",&vchar);
             insert_value(col,&vchar);
             break;
         case FLOAT:
-            printf("Veuillez entrer une valeur réel:\n");
+            printf("Veuillez entrer une valeur réel : \n");
             scanf("%f",&vfloat);
             insert_value(col,&vfloat);
             break;
         case DOUBLE:
-            printf("Veuillez entrer une valeur réel:\n");
+            printf("Veuillez entrer une valeur réel : \n");
             scanf("%lf",&vdouble);
             insert_value(col,&vdouble);
             break;
         case STRING:
-            printf("Veuillez entrer une chaine de caractères:\n");
-            scanf("%s",vstr);
+            printf("Veuillez entrer une chaine de caractères : \n");
+            scanf(" %s",vstr);
             insert_value(col,vstr);
             break;
         default:

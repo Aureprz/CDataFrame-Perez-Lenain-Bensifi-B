@@ -122,11 +122,16 @@ int cellssup_cdataframe(CDATAFRAME* dataframe, void* value);
 /**
  * @brief:  Shows the numbers of cells inferior than the value in the CDataFrame
  * @param1: Pointer to the CDataFrame
- * @param2: value wanted
- * @param3: value type
- * @return: number of cells inferior
+ * @param2: Value
  */
 int cellsinf_cdataframe(CDATAFRAME* dataframe, void* value);
+
+/**
+ * @brief: Gives the user the number of cells in which the value is superior compared to a value in the CDataFrame
+ * @param1: CDataFrame
+ * @param2: User's value
+ */
+int cellssup_cdataframe(CDATAFRAME* dataframe, void* value);
 
 /**
  * @brief:  Rename a column in the CDataFrame
@@ -153,5 +158,6 @@ int column_number(CDATAFRAME* cdf);
 
 int line_number(CDATAFRAME* cdf);
 
+void append_column_dataframe(CDATAFRAME* cdf);
 
 #endif //CDATAFRAME_PEREZ_LENAIN_BENSIFI_CDATAFRAME_H

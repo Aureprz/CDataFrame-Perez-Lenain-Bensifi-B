@@ -6,16 +6,7 @@
 #include <stdlib.h>
 
 int main(){
-    COLUMN *mycol = create_column(STRING, "String column");
-    insert_value(mycol, "Lima");
-    insert_value(mycol, "Bravo");
-    insert_value(mycol, "Zulu");
-    insert_value(mycol, "Tango");
-    printf("Columncontentbeforesorting :\n");
-    print_col(mycol);
-    sort(mycol,DESC);
-    printf("Columncontentaftersorting: \n");
-    print_col_by_index(mycol);
+
     return 0;
 }
 

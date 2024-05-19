@@ -117,6 +117,24 @@ int cellsinf_cdataframe(CDATAFRAME* dataframe, void* value) {
         current = get_next_node(dataframe->list, current);
 
     }
+    return cpt;
+}
+
+int cellssup_cdataframe(CDATAFRAME* dataframe, void* value) {
+    int cpt = 0;
+    if ((dataframe == NULL) || (dataframe->size == 0)) {
+        return cpt;
+    }
+    lnode *current = get_first_node(dataframe->list);
+    if (current == NULL) {
+        return cpt;
+    }
+    while (current->next != NULL) {
+        cpt += cellssup_col(current->data, value);
+        current = get_next_node(dataframe->list, current);
+
+    }
+    return cpt;
 }
 
 void print_col_names(CDATAFRAME* cdf){
@@ -177,7 +195,7 @@ void delete_column_cdf(CDATAFRAME *cdf, char *col_name){
         node = node->next;
     }
 
-    printf("La colonne \" %s \" n'a pas été trouvée dans le dataframe. \n", col_name);
+    printf("La colonne \" %s \" n'a pas été trouvée dans le DataFrame. \n", col_name);
 }
 
 void delete_cdf_line(CDATAFRAME *cdf, int position){
@@ -227,4 +245,51 @@ void replace_value_cdf(CDATAFRAME *cdf, int row_location, int col_location){
     printf("Saisissez la nouvelle valeur que vous souhaitez : \n");
     insert_user_val(col);
     col->size = tmp;
+    printf("La valeur a été remplacée.\n");
+}
+
+void append_column_dataframe(CDATAFRAME* cdf){
+    COLUMN* col;
+    lnode* current = cdf->list->head;
+    int pos;
+    int i;
+    if (cdf == NULL || cdf->list == NULL || cdf->list->head == NULL)
+    {
+        return;
+    }
+    col = create_col_user();
+    lnode* node = lst_create_lnode(col);
+    do{
+        printf("Saisissez la position à laquelle vous souhaitez rajouter cette nouvelle colonne : \n");
+        scanf("%d",&pos);
+    }while(pos<=0);
+    for (i = 0 ; i < cdf->size ; i++){
+        current = current->next;
+        if (pos == 1){
+            lst_insert_head(cdf->list,node);
+            return;
+        }
+        if (pos >= cdf->size){
+            lst_insert_tail(cdf->list,node);
+            return;
+        }
+        if (i+1 == pos){
+            lst_insert_after(cdf->list,node,current);
+            return;
+        }
+    }
+    printf("La colonne \" %s \" a bien été ajoutée à la position %d dans le DataFrame.\n",col->title,pos);
+}
+
+void append_line_dataframe(CDATAFRAME *cdf, int pos){
+    lnode* node = cdf->list->head;
+    COLUMN* col = node->data;
+    int i;
+    void* val;
+    for (i = 0 ; i < cdf->size; i++){
+        printf("Colonne \" %s \" \n",col->title);
+        insert_user_val(col);
+        node = node->next;
+    }
+    printf("La ligne a bien été ajoutée au DataFrame.\n");
 }
