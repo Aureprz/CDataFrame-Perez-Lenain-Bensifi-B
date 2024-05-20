@@ -27,7 +27,7 @@ CDATAFRAME* create_cdf_user(){
     COLUMN* col = NULL;
     lnode* newnode = NULL;
     do{
-        printf("Veuillez saisir le nombre de colonnes du CDataFrame : \n");
+        printf("Veuillez saisir le nombre de colonnes de votre CDataFrame : \n");
         scanf("%d", &size);
     }while(size <= 0);
     ENUM_TYPE list_type[size];

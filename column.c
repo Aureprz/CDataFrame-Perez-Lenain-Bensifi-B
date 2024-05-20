@@ -22,7 +22,7 @@ COLUMN *create_column(ENUM_TYPE type, char *title){
     return col;
 }
 
-COLUMN *create_col_user(){
+COLUMN* create_col_user(){
     char title[MAX_SIZE];
     int i=0;
     ENUM_TYPE type;
