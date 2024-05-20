@@ -4,7 +4,7 @@
 #include "list.h"
 #include <string.h>
 
-#define MAX_SIZE 32
+#define MAX_SIZE 20
 
 // 1. Alimentation
 
@@ -182,7 +182,7 @@ void print_col_names(CDATAFRAME* cdf){
 
 void display_dataframe(CDATAFRAME* cdf){
     unsigned int i;
-    if ((cdf == NULL) || cdf->list || cdf->size == 0) {
+    if ((cdf == NULL) || cdf->list == NULL || cdf->size == 0) {
         printf("Dataframe vide \n");
         return;
     }
