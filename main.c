@@ -36,6 +36,7 @@ int main() {
         while (answer < 1 || answer > 5) {
             printf("Entrez votre choix : \n");
             scanf("%d", &answer);
+            viderBuffer();
             printf("\n");
         }
         switch (answer) {
