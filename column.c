@@ -47,6 +47,7 @@ int insert_user_val(COLUMN *col){
     double vdouble;
     char vchar;
     char vstr[MAX_SIZE];
+    int res=1;
 
     switch (col->column_type) {
         case UINT:
@@ -80,8 +81,10 @@ int insert_user_val(COLUMN *col){
             insert_value(col,vstr);
             break;
         default:
-            printf("ERROR");
+            printf("ERREUR \n");
+            res = 0;
     }
+    return res;
 }
 
 int insert_value(COLUMN *col, void *value){
@@ -198,6 +201,7 @@ void convert_value(COLUMN *col, unsigned long long int i, char *str, int size){
         }
 }
 
+
 void print_col(COLUMN* col){
     unsigned long long int i;
     for (i = 0; i < col->size; i++){
@@ -303,7 +307,6 @@ int cellsequal_col(COLUMN* col, void *value){
     }
     return cpt;
 }
-
 
 
 int cellssup_col(COLUMN* col, void *value){

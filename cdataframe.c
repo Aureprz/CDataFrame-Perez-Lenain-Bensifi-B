@@ -57,10 +57,18 @@ CDATAFRAME* create_cdf_program(){
     lnode* node = NULL;
     COLUMN* col = NULL;
     CDATAFRAME* cdf = create_empty_cdataframe(&cdftype,size);
+    char title[] = "Colonne";
     int i,j;
+    int cpt=0;
+    int val;
     for (i = 0 ; i < size ; i++){
-        char title[] = {'C', 'o', 'l', 'l', 'o', 'n', 'n', 'e', i};
         col = create_column(*cdf->list_type,title);
+        cpt++;
+        for (j = 0 ; j < 3 ; j++){
+            val = j + cpt;
+            col->data[col->size] = (COL_TYPE *) malloc(sizeof(int));
+            *((int*)col->data[col->size]) = ((int)val);
+        }
         node = lst_create_lnode(col);
         lst_insert_tail(cdf->list, node);
     }
@@ -68,19 +76,20 @@ CDATAFRAME* create_cdf_program(){
 }
 
 
-int cellexist_cdataframe(CDATAFRAME* dataframe, void* value){
-    int cpt = 0;
-    if ((dataframe == NULL) || (dataframe->size == 0)){
+
+int cellexist_cdataframe(CDATAFRAME* cdf, void* value){
+    int cpt=0;
+    if (cdf == NULL || cdf->list == NULL || cdf->list->head == NULL){
+        printf("Dataframe vide.");
         return cpt;
     }
-    lnode* current = dataframe->list->head;
-
+    lnode* current = cdf->list->head;
     while (current->next != NULL){
         cpt += exist_col(current->data, value);
-        if (cpt> 0){
+        if (cpt > 0){
             return cpt;
         }
-        current = get_next_node(dataframe->list, current);
+        current = get_next_node(cdf->list, current);
     }
     cpt += exist_col(current->data, value);
     return cpt;
@@ -93,30 +102,12 @@ int cellsequal_cdataframe(CDATAFRAME* dataframe, void* value){
         return cpt;
     }
     lnode* current = dataframe->list->head;
-
     while (current->next != NULL){
         cpt += cellsequal_col(current->data, value);
         current = get_next_node(dataframe->list, current);
     }
     cpt += cellsequal_col(current->data, value);
     return cpt;
-}
-
-
-
-void rename_col(CDATAFRAME* cdf, char* title_replaced){
-    lnode *current = cdf->list->head;
-    COLUMN *col = NULL;
-    int i;
-    char *str = (char *) malloc(sizeof(char));
-    printf("Choisissez un nouveau nom de colonne : \n");
-    scanf(" %s", str);
-    for (i = 0; i < cdf->size; i++) {
-        col = current->data;
-        if (strcmp(col->title, title_replaced) == 0) { // Compare les 2 chaînes de caractères
-            col->title = str;
-        }
-    }
 }
 
 
@@ -154,7 +145,30 @@ int cellssup_cdataframe(CDATAFRAME* dataframe, void* value) {
     return cpt;
 }
 
+void rename_col(CDATAFRAME* cdf, char* title_replaced){
+    if (cdf == NULL || cdf->list == NULL || cdf->list->head == NULL){
+        printf("Dataframe vide.");
+        return;
+    }
+    lnode *current = cdf->list->head;
+    COLUMN *col = NULL;
+    int i;
+    char *str = (char *) malloc(sizeof(char));
+    printf("Choisissez un nouveau nom de colonne : \n");
+    scanf(" %s", str);
+    for (i = 0; i < cdf->size; i++) {
+        col = current->data;
+        if (strcmp(col->title, title_replaced) == 0) { // Compare les 2 chaînes de caractères
+            col->title = str;
+        }
+    }
+}
+
 void print_col_names(CDATAFRAME* cdf){
+    if (cdf == NULL || cdf->list == NULL || cdf->list->head == NULL){
+        printf("Dataframe vide.");
+        return;
+    }
     lnode* current = cdf->list->head;
     int i;
     COLUMN* col;
@@ -165,41 +179,39 @@ void print_col_names(CDATAFRAME* cdf){
     }
 }
 
-void show_cdataframe(CDATAFRAME* dataframe){
+void display_dataframe(CDATAFRAME* cdf){
     unsigned int i;
-    if ((dataframe == NULL) || (dataframe->size == 0)) {
+    if ((cdf == NULL) || (cdf->size == 0)) {
         return;
     }
-    lnode *current = get_first_node(dataframe->list);
+    lnode *current = get_first_node(cdf->list);
     if (current == NULL) {
         printf("Dataframe vide \n");
         return;
     }
     while (current->next != NULL) {
-        print_col_names(dataframe);
+        print_col_names(cdf);
         current->data;
-        current = get_next_node(dataframe->list, current);
+        current = get_next_node(cdf->list, current);
     }
-    for (i = 0 ; i < dataframe->nb_line ; i++) {
-        current = get_first_node(dataframe->list);
+    for (i = 0 ; i < cdf->nb_line ; i++) {
+        current = get_first_node(cdf->list);
         while (current->next != NULL) {
             print_val_in_col(current->data, i);
-            current = get_next_node(dataframe->list, current);
+            current = get_next_node(cdf->list, current);
         }
     }
     printf("\n");
 }
 
 void delete_column_cdf(CDATAFRAME *cdf, char *col_name){
-    if (cdf == NULL || col_name == NULL || cdf->list == NULL || cdf->list->head == NULL)
-    {
+    if (cdf == NULL || cdf->list == NULL || cdf->list->head == NULL){
+        printf("Dataframe vide.");
         return;
     }
-
     lnode *node = cdf->list->head;
     COLUMN *col = NULL;
     dllist *list = cdf->list;
-
     while (node != NULL) {
 
         col = node->data;
@@ -211,22 +223,34 @@ void delete_column_cdf(CDATAFRAME *cdf, char *col_name){
         }
         node = node->next;
     }
-
     printf("La colonne \" %s \" n'a pas été trouvée dans le DataFrame. \n", col_name);
 }
 
-void delete_cdf_line(CDATAFRAME *cdf, int position){
+void delete_cdf_line(CDATAFRAME *cdf){
+    if (cdf == NULL || cdf->list == NULL || cdf->list->head == NULL){
+        printf("Dataframe vide.");
+        return;
+    }
+    int pos=0;
+    do{
+        printf("Choisissez la position à laquelle vous souhaitez retirer une ligne : \n");
+        scanf("%d",&pos);
+    }while(pos<=0);
     lnode *node = cdf->list->head;
     for (int i = 0 ; i < cdf->size ; i++){
-        delete_value_column(node->data,position);
+        delete_value_column(node->data,pos);
         node = node->next;
     }
 }
 
 int column_number(CDATAFRAME* cdf){
+    int cpt=0;
+    if (cdf == NULL || cdf->list == NULL || cdf->list->head == NULL){
+        printf("Dataframe vide.");
+        return cpt;
+    }
     int nb_col;
     int i;
-    int cpt=0;
     lnode* current = cdf->list->head;
     char* title = current->data->title;
     while (current->next != NULL){
@@ -239,8 +263,12 @@ int column_number(CDATAFRAME* cdf){
 }
 
 int line_number(CDATAFRAME* cdf){
-    int i;
     int cpt=0;
+    if (cdf == NULL || cdf->list == NULL || cdf->list->head == NULL){
+        printf("Dataframe vide.");
+        return cpt;
+    }
+    int i;
     COLUMN* col = cdf->list->head->data;
     for (i = 0 ; i < col->size ; i++){
         cpt++;
@@ -248,11 +276,28 @@ int line_number(CDATAFRAME* cdf){
     return cpt;
 }
 
-void replace_value_cdf(CDATAFRAME *cdf, int row_location, int col_location){
+void replace_value_cdf(CDATAFRAME *cdf){
+    if (cdf == NULL || cdf->list == NULL || cdf->list->head == NULL){
+        printf("Dataframe vide.");
+        return;
+    }
     int i;
     unsigned int tmp = 0; // tmp will be used to keep the column size
     lnode *node = cdf->list->head;
     COLUMN *col = NULL;
+    int row_location=0;
+    int col_location=0;
+    do{
+        printf("Choisissez la ligne où vous souhaitez remplacer la valeur : \n");
+        scanf("%d",&row_location);
+    }while(row_location<=0);
+    do{
+        printf("Choisissez la colonne où vous souhaitez remplacer la valeur : \n");
+        scanf("%d",&col_location);
+    }while(col_location<=0);
+    if (col_location >= cdf->size){
+        col_location = cdf->size;
+    }
     for (i = 0 ; i < col_location - 1 ; i++){
         node = node->next;
     }
@@ -262,22 +307,22 @@ void replace_value_cdf(CDATAFRAME *cdf, int row_location, int col_location){
     printf("Saisissez la nouvelle valeur que vous souhaitez : \n");
     insert_user_val(col);
     col->size = tmp;
-    printf("La valeur a été remplacée.\n");
+    printf("La valeur a bien été remplacée.\n");
 }
 
 void append_column_dataframe(CDATAFRAME* cdf){
+    if (cdf == NULL || cdf->list == NULL || cdf->list->head == NULL){
+        printf("Dataframe vide.");
+        return;
+    }
     COLUMN* col;
     lnode* current = cdf->list->head;
     int pos;
     int i;
-    if (cdf == NULL || cdf->list == NULL || cdf->list->head == NULL)
-    {
-        return;
-    }
     col = create_col_user();
     lnode* node = lst_create_lnode(col);
     do{
-        printf("Saisissez la position à laquelle vous souhaitez rajouter cette nouvelle colonne : \n");
+        printf("Choisissez la position à laquelle vous souhaitez rajouter une colonne : \n");
         scanf("%d",&pos);
     }while(pos<=0);
     for (i = 0 ; i < cdf->size ; i++){
@@ -298,7 +343,16 @@ void append_column_dataframe(CDATAFRAME* cdf){
     printf("La colonne \" %s \" a bien été ajoutée à la position %d dans le DataFrame.\n",col->title,pos);
 }
 
-void append_line_dataframe(CDATAFRAME *cdf, int pos){
+void append_line_dataframe(CDATAFRAME *cdf){
+    if (cdf == NULL || cdf->list == NULL || cdf->list->head == NULL){
+        printf("Dataframe vide.");
+        return;
+    }
+    int pos=0;
+    do{
+        printf("Choisissez la position à laquelle vous souhaitez rajouter une ligne : \n");
+        scanf("%d",&pos);
+    }while(pos<=0);
     lnode* node = cdf->list->head;
     COLUMN* col = node->data;
     int i;
@@ -312,6 +366,10 @@ void append_line_dataframe(CDATAFRAME *cdf, int pos){
 }
 
 void display_columns(CDATAFRAME* cdf){
+    if (cdf == NULL || cdf->list == NULL || cdf->list->head == NULL){
+        printf("Dataframe vide.");
+        return;
+    }
     lnode* current = cdf->list->head;
     COLUMN* col;
     int i;
@@ -339,17 +397,21 @@ void display_columns(CDATAFRAME* cdf){
 }
 
 void display_lines(CDATAFRAME* cdf){
+    if (cdf == NULL || cdf->list == NULL || cdf->list->head == NULL){
+        printf("Dataframe vide.");
+        return;
+    }
     lnode* current = cdf->list->head;
     COLUMN* col = current->data;
     unsigned long long int i;
     char str[32];
     int start=0; int end=0;
     do{
-        printf("Choisir la position de la colonne de départ : \n");
+        printf("Choisir la position de la ligne de départ : \n");
         scanf("%d",&start);
     }while(start<0);
     do{
-        printf("Choisir la position de la colonne de fin : \n");
+        printf("Choisir la position de la ligne de fin : \n");
         scanf("%d",&end);
     }while(end<0);
     if (end >= col->size){

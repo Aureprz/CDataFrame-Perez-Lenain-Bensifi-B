@@ -28,13 +28,6 @@ CDATAFRAME* create_cdf_user();
 
 CDATAFRAME* create_cdf_program();
 
-/**
- * @brief: Create by itself the Dataframe
- * @param1: Dataframe type
- * @param2: Number of columns in the Dataframe
- */
-
-CDATAFRAME *create_cdataframe(ENUM_TYPE *cdftype, int size);
 
 /**
  * @brief: Printout each column name
@@ -55,43 +48,8 @@ void show_cdataframe(CDATAFRAME* dataframe);
  * @param2: The row location in which the user wants to change the value
  * @param2: The column location in which the user wants to swap the value
  */
-void replace_value_cdf(CDATAFRAME *cdf, int row_location, int col_location);
+void replace_value_cdf(CDATAFRAME *cdf);
 
-/**
- * @brief:  Shows part of the lines of the CDataFrame
- * @param1: Pointer to the CDataFrame
- * @param2: number of the first line
- * @param3: number of the last line
- */
-void showline_cdataframe(CDATAFRAME* dataframe, int start, int end);
-
-/**
- * @brief:  Shows part of the column of the CDataFrame
- * @param1: Pointer to the CDataFrame
- * @param2: number of the first line
- * @param3: number of the last line
- */
-void showcolumn_cdataframe(CDATAFRAME* dataframe, int start, int end);
-
-/**
- * @brief:  Shows names of the columns of the CDataFrame
- * @param1: Pointer to the CDataFrame
- */
-void shownamecolumn_cdataframe(CDATAFRAME* dataframe);
-
-/**
- * @brief:  Shows number of lines of the CDataFrame
- * @param1: Pointer to the CDataFrame
- * @return: number of lines
- */
-int shownumline_cdataframe(CDATAFRAME* dataframe);
-
-/**
- * @brief:  Shows number of columns of the CDataFrame
- * @param1: Pointer to the CDataFrame
- * @return: number of columns
- */
-int shownumcolumn_cdataframe(CDATAFRAME* dataframe);
 
 /**
  * @brief:  Looks for a value in the CDataFrame
@@ -100,7 +58,7 @@ int shownumcolumn_cdataframe(CDATAFRAME* dataframe);
  * @param3: value type
  * @return: 1 if the value exists 0 otherwise
  */
-int cellexist_cdataframe(CDATAFRAME* dataframe, void* value);
+int cellexist_cdataframe(CDATAFRAME* cdf, void* value);
 
 /**
  * @brief:  Shows the numbers of cells match with the value in the CDataFrame
@@ -132,26 +90,24 @@ int cellsinf_cdataframe(CDATAFRAME* dataframe, void* value);
  * @param1: CDataFrame
  * @param2: User's value
  */
+
 int cellssup_cdataframe(CDATAFRAME* dataframe, void* value);
 
-
-/**
- * @brief: Delete a selected line within the Dataframe
- * @param1: Dataframe
- * @param2: Position of this line in the Dataframe
- */
+void display_dataframe(CDATAFRAME* cdf);
 
 void rename_col(CDATAFRAME* cdf, char* title_replaced);
 
 void delete_column_cdf(CDATAFRAME *cdf, char *col_name);
 
-void delete_cdf_line(CDATAFRAME *cdf, int location);
+void delete_cdf_line(CDATAFRAME *cdf);
 
 int column_number(CDATAFRAME* cdf);
 
 int line_number(CDATAFRAME* cdf);
 
 void append_column_dataframe(CDATAFRAME* cdf);
+
+void append_line_dataframe(CDATAFRAME *cdf);
 
 void display_columns(CDATAFRAME* cdf);
 

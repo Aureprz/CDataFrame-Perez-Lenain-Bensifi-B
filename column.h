@@ -127,6 +127,8 @@ int cellsinf_col(COLUMN* col, void *value);
 */
 void print_col_by_index(COLUMN *col);
 
+int nb_occurence(COLUMN* col, char* str);
+
 COLUMN *create_col_user();
 
 void print_val_in_col(COLUMN* col , unsigned long long int index);
