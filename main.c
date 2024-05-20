@@ -8,7 +8,7 @@
 
 int main() {
     CDATAFRAME *cdf = NULL;
-    int result;
+    int nb_col, nb_line;
     int answer = 0;
     int answer_part1 = 0;
     int answer_part2 = 0;
@@ -177,7 +177,7 @@ int main() {
                         printf("Veuillez entrer la valeur que vous souhaitez rechercher dans le DataFrame : \n");
                         scanf(" %s", str);
                         viderBuffer();
-                        result = cellexist_cdataframe(cdf, str);
+                        cellexist_cdataframe(cdf, str);
                         answer = 0;
                         answer_part3 = 0;
                         break;
@@ -220,12 +220,13 @@ int main() {
                 }
                 switch (answer_part4) {
                     case 1:
-                        result = column_number(cdf);
+                        nb_col = column_number(cdf);
                         answer = 0;
                         answer_part4 = 0;
                         break;
                     case 2:
-                        result = line_number(cdf);
+                        nb_line;
+                        nb_line = line_number(cdf);
                         answer = 0;
                         answer_part4 = 0;
                         break;
@@ -234,7 +235,7 @@ int main() {
                                "egales à cette valeur : \n");
                         scanf(" %s", str);
                         viderBuffer();
-                        result = cellsequal_cdataframe(cdf, str);
+                        printf("%d",cellsequal_cdataframe(cdf, str));
                         answer = 0;
                         answer_part4 = 0;
                         break;
@@ -243,7 +244,7 @@ int main() {
                                "superieures à cette valeur : \n");
                         scanf(" %s", str);
                         viderBuffer();
-                        result = cellssup_cdataframe(cdf, str);
+                        printf("%d",cellssup_cdataframe(cdf, str));
                         answer = 0;
                         answer_part4 = 0;
                         break;
@@ -252,7 +253,7 @@ int main() {
                                "inferieures à cette valeur : \n");
                         scanf(" %s", str);
                         viderBuffer();
-                        result = cellsinf_cdataframe(cdf, str);
+                        printf("%d",cellsinf_cdataframe(cdf, str));
                         answer = 0;
                         answer_part4 = 0;
                         break;
