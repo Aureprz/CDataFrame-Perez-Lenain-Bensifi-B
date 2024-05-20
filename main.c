@@ -178,6 +178,12 @@ int main() {
                         scanf(" %s", str);
                         viderBuffer();
                         result = cellexist_cdataframe(cdf, str);
+                        if result == 1{
+                            printf("La valeur existe\n");
+                        }
+                        else{
+                        printf("La valeur n'existe pas\n");
+                        }
                         answer = 0;
                         answer_part3 = 0;
                         break;
