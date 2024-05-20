@@ -15,7 +15,12 @@ int main() {
     int answer_part3 = 0;
     int answer_part4 = 0;
     char str[32];
-    do {
+    do{
+        answer = 0;
+        answer_part1 = 0;
+        answer_part2 = 0;
+        answer_part3 = 0;
+        answer_part4 = 0;
         printf("######################################### \n");
         printf("#           Projet CDataFrame           # \n");
         printf("######################################### \n");
@@ -49,6 +54,7 @@ int main() {
                 while ((answer_part1 < 1) || (answer_part1 > 3)) {
                     printf("Veuillez entrer votre choix : \n");
                     scanf("%d", &answer_part1);
+                    viderBuffer();
                     printf("\n");
                 }
                 switch (answer_part1) {
@@ -84,6 +90,7 @@ int main() {
                 while (answer_part2 < 1 || answer_part2 > 4) {
                     printf("Veuillez entrer votre choix : \n");
                     scanf("%d", &answer_part2);
+                    viderBuffer();
                     printf("\n");
                 }
                 switch (answer_part2) {
@@ -129,6 +136,7 @@ int main() {
                 while (answer_part3 < 1 || answer_part3 > 9) {
                     printf("Veuillez entrer votre choix : \n");
                     scanf("%d", &answer_part3);
+                    viderBuffer();
                     printf("\n");
                 }
                 switch (answer_part3) {
@@ -150,6 +158,7 @@ int main() {
                     case 4:
                         printf("Entrez le nom de la colonne que vous souhaitez supprimer du DataFrame : \n");
                         scanf(" %s", str);
+                        viderBuffer();
                         delete_column_cdf(cdf, str);
                         answer = 0;
                         answer_part3 = 0;
@@ -158,6 +167,7 @@ int main() {
                         print_col_names(cdf);
                         printf("Entrez le nom de la colonne que vous souhaitez renommer : \n");
                         scanf(" %s", str);
+                        viderBuffer();
                         rename_col(cdf, str);
                         answer = 0;
                         answer_part3 = 0;
@@ -165,6 +175,7 @@ int main() {
                     case 6:
                         printf("Veuillez entrer la valeur que vous souhaitez rechercher dans le DataFrame : \n");
                         scanf(" %s", str);
+                        viderBuffer();
                         cellexist_cdataframe(cdf, str);
                         answer = 0;
                         answer_part3 = 0;
@@ -203,6 +214,7 @@ int main() {
                 while (answer_part4 < 1 || answer_part4 > 6) {
                     printf("Veuillez entrer votre choix : \n");
                     scanf("%d", &answer_part4);
+                    viderBuffer();
                     printf("\n");
                 }
                 switch (answer_part4) {
@@ -221,6 +233,7 @@ int main() {
                         printf("Veuillez entrer la valeur dont vous souhaitez connaitre le nombre de cellules "
                                "egales à cette valeur : \n");
                         scanf(" %s", str);
+                        viderBuffer();
                         cellsequal_cdataframe(cdf, str);
                         answer = 0;
                         answer_part4 = 0;
@@ -229,6 +242,7 @@ int main() {
                         printf("Veuillez entrer la valeur dont vous souhaitez connaitre le nombre de cellules "
                                "superieures à cette valeur : \n");
                         scanf(" %s", str);
+                        viderBuffer();
                         cellssup_cdataframe(cdf, str);
                         answer = 0;
                         answer_part4 = 0;
@@ -237,6 +251,7 @@ int main() {
                         printf("Veuillez entrer la valeur dont vous souhaitez connaitre le nombre de cellules "
                                "inferieures à cette valeur : \n");
                         scanf(" %s", str);
+                        viderBuffer();
                         cellsinf_cdataframe(cdf, str);
                         answer = 0;
                         answer_part4 = 0;

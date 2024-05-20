@@ -36,6 +36,7 @@ CDATAFRAME* create_cdf_program();
 
 void print_col_names(CDATAFRAME* cdf);
 
+void viderBuffer();
 
 /**
  * @brief: Replace a value within the Dataframe
