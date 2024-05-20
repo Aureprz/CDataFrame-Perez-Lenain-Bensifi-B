@@ -133,68 +133,6 @@ int compare_in_col(COLUMN *col, unsigned long long int i, unsigned long long int
     return 0;
 }
 
-int compare_val_in_col(COLUMN *col, unsigned long long int i, void* val) {
-    int res;
-    switch (col->column_type) {
-
-        case INT:
-            if (*((int*)col->data[i]) > *(int*) val){
-                return 1;
-            }
-            if (*((int*)col->data[i]) < *(int*) val){
-                return -1;
-            }
-            break;
-        case UINT:
-            if (*((unsigned int*)col->data[i]) > *(int*) val){
-                return 1;
-            }
-            if (*((unsigned int*)col->data[i]) < *(int*) val){
-                return -1;
-            }
-            break;
-
-        case FLOAT:
-            if (*((float*)col->data[i]) > *(float*) val){
-                return 1;
-            }
-            if (*((float*)col->data[i]) < *(float*) val){
-                return -1;
-            }
-            break;
-
-        case DOUBLE:
-            if (*((double*)col->data[i]) > *(double*) val){
-                return 1;
-            }
-            if (*((double*)col->data[i]) < *(double*) val){
-                return -1;
-            }
-            break;
-
-        case CHAR:
-            if (*((char*)col->data[i]) > *(char*) val){
-                return 1;
-            }
-            if (*((char*)col->data[i]) < *(char*) val){
-                return -1;
-            }
-            break;
-
-        case STRING:
-            res = strcmp((char*)col->data[i], (char*)val);
-            if(res>0){
-                return 1;
-            }
-            if(res<0){
-                return -1;
-            }
-            break;
-        default:
-            break;
-    }
-    return 0;
-}
 
 void swap(unsigned long long int *a, unsigned long long int *b){
     unsigned long long int temp = *a;

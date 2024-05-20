@@ -91,7 +91,7 @@ void print_col(COLUMN* col);
  * @param3: value type
  * @return: 1 if the value exists 0 otherwise
  */
-int exist_col(COLUMN* col, void *value);
+int exist_col(COLUMN* col, char *value);
 
 /**
  * @brief:  Shows the numbers of cells match with the value in the CDataFrame
@@ -100,7 +100,7 @@ int exist_col(COLUMN* col, void *value);
  * @param3: value type
  * @return: number of cells equals
  */
-int cellsequal_col(COLUMN* col, void *value);
+int cellsequal_col(COLUMN* col, char *value);
 
 /**
  * @brief:  Shows the numbers of cells superior than the value in the CDataFrame
@@ -109,7 +109,7 @@ int cellsequal_col(COLUMN* col, void *value);
  * @param3: value type
  * @return: number of cells superior
  */
-int cellssup_col(COLUMN* col, void *value);
+int cellssup_col(COLUMN* col, char *value);
 
 /**
  * @brief:  Shows the numbers of cells inferior than the value in the CDataFrame
@@ -118,7 +118,7 @@ int cellssup_col(COLUMN* col, void *value);
  * @param3: value type
  * @return: number of cells inferior
  */
-int cellsinf_col(COLUMN* col, void *value);
+int cellsinf_col(COLUMN* col, char *value);
 
 
 /**
@@ -127,7 +127,6 @@ int cellsinf_col(COLUMN* col, void *value);
 */
 void print_col_by_index(COLUMN *col);
 
-int nb_occurence(COLUMN* col, char* str);
 
 COLUMN *create_col_user();
 

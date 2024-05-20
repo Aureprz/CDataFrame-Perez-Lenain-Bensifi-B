@@ -221,187 +221,69 @@ void print_val_in_col(COLUMN* col , unsigned long long int index){
     printf("[%llu] %-20.20s \n", index, str);
 }
 
-int exist_col(COLUMN* col, void *value){
+int exist_col(COLUMN* col, char *value){
     if (col == NULL || col->size == 0){
         return 0;
     }
-    for(unsigned long long int i = 0; i < col->size; i++){
-        switch (col->column_type) {
+    char str2[MAX_SIZE];
 
-            case INT:
-                if (*((int*)col->data[i]) == *((int *)value)){
-                    return 1;
-                }
-                break;
-            case UINT:
-                if (*((unsigned int*)col->data[i]) == *((unsigned int *)value)){
-                    return 1;
-                }
-                break;
-            case FLOAT:
-                if (*((float*)col->data[i]) == *((float *)value)){
-                    return 1;
-                }
-                break;
-            case DOUBLE:
-                if (*((double*)col->data[i]) == *((double *)value)){
-                    return 1;
-                }
-                break;
-            case CHAR:
-                if (*((char*)col->data[i]) == *((char *)value)){
-                    return 1;
-                }
-                break;
-            case STRING:
-                if (strcmp((char*)col->data[i], (char *)value) == 0){
-                    return 1;
-                }
-                break;
-            default:
-                break;
+    for(unsigned long long int i = 0; i < col->size; i++){
+        convert_value(col, i, str2, MAX_SIZE);
+        if (strcmp(str2,value) == 0) {
+            return 1;
         }
+
     }
     return 0;
 }
 
-int cellsequal_col(COLUMN* col, void *value){
+int cellsequal_col(COLUMN* col, char *value){
     int cpt = 0;
     if (col == NULL || col->size == 0){
         return 0;
     }
-    for(unsigned long long int i = 0; i < col->size; i++){
-        switch (col->column_type) {
+    char str2[MAX_SIZE];
 
-            case INT:
-                if (*((int*)col->data[i]) == *((int *)value)){
-                    cpt++;
-                }
-                break;
-            case UINT:
-                if (*((unsigned int*)col->data[i]) == *((unsigned int *)value)){
-                    cpt++;
-                }
-                break;
-            case FLOAT:
-                if (*((float*)col->data[i]) == *((float *)value)){
-                    cpt++;
-                }
-                break;
-            case DOUBLE:
-                if (*((double*)col->data[i]) == *((double *)value)){
-                    cpt++;
-                }
-                break;
-            case CHAR:
-                if (*((char*)col->data[i]) == *((char *)value)){
-                    cpt++;
-                }
-                break;
-            case STRING:
-                if (strcmp((char*)col->data[i], (char *)value) == 0){
-                    cpt++;
-                }
-                break;
-            default:
-                break;
+    for(unsigned long long int i = 0; i < col->size; i++){
+        convert_value(col, i, str2, MAX_SIZE);
+        if (strcmp(str2,value) == 0) {
+            cpt++;
         }
     }
     return cpt;
 }
 
 
-int cellssup_col(COLUMN* col, void *value){
+int cellssup_col(COLUMN* col, char *value){
     int cpt = 0;
     if (col == NULL || col->size == 0){
         return 0;
     }
-    for(unsigned long long int i = 0; i < col->size; i++){
-        switch (col->column_type) {
+    char str2[MAX_SIZE];
 
-            case INT:
-                if (*((int*)col->data[i]) > *((int *)value)){
-                    cpt++;
-                }
-                break;
-            case UINT:
-                if (*((unsigned int*)col->data[i]) > *((unsigned int *)value)){
-                    cpt++;
-                }
-                break;
-            case FLOAT:
-                if (*((float*)col->data[i]) > *((float *)value)){
-                    cpt++;
-                }
-                break;
-            case DOUBLE:
-                if (*((double*)col->data[i]) > *((double *)value)){
-                    cpt++;
-                }
-                break;
-            case CHAR:
-                if (*((char*)col->data[i]) > *((char *)value)){
-                    cpt++;
-                }
-                break;
-            case STRING:
-                if (strcmp((char*)col->data[i], (char *)value) > 0){
-                    cpt++;
-                }
-                break;
-            default:
-                break;
+    for(unsigned long long int i = 0; i < col->size; i++){
+        convert_value(col, i, str2, MAX_SIZE);
+        if (strcmp(str2,value) > 0) {
+            cpt++;
         }
     }
     return cpt;
 }
 
 
-
-
-int cellsinf_col(COLUMN* col, void *value){
+int cellsinf_col(COLUMN* col, char *value){
     int cpt = 0;
     if (col == NULL || col->size == 0){
         return 0;
     }
-    for(unsigned long long int i = 0; i < col->size; i++){
-        switch (col->column_type) {
+    char str2[MAX_SIZE];
 
-            case INT:
-                if (*((int*)col->data[i]) < *((int *)value)){
-                    cpt++;
-                }
-                break;
-            case UINT:
-                if (*((unsigned int*)col->data[i]) < *((unsigned int *)value)){
-                    cpt++;
-                }
-                break;
-            case FLOAT:
-                if (*((float*)col->data[i]) < *((float *)value)){
-                    cpt++;
-                }
-                break;
-            case DOUBLE:
-                if (*((double*)col->data[i]) < *((double *)value)){
-                    cpt++;
-                }
-                break;
-            case CHAR:
-                if (*((char*)col->data[i]) < *((char *)value)){
-                    cpt++;
-                }
-                break;
-            case STRING:
-                if (strcmp((char*)col->data[i], (char *)value) < 0){
-                    cpt++;
-                }
-                break;
-            default:
-                break;
+    for(unsigned long long int i = 0; i < col->size; i++){
+        convert_value(col, i, str2, MAX_SIZE);
+        if (strcmp(str2,value) < 0) {
+            cpt++;
         }
     }
     return cpt;
 }
-
 
