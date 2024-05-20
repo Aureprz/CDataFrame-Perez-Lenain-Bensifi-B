@@ -240,7 +240,7 @@ int main() {
                                "egales à cette valeur : \n");
                         scanf(" %s", str);
                         viderBuffer();
-                        result = cellsequal_cdataframe(cdf, str);
+                        printf("%d",cellsequal_cdataframe(cdf, str));
                         answer = 0;
                         answer_part4 = 0;
                         break;
@@ -249,7 +249,7 @@ int main() {
                                "superieures à cette valeur : \n");
                         scanf(" %s", str);
                         viderBuffer();
-                        result = cellssup_cdataframe(cdf, str);
+                        printf("%d",cellssup_cdataframe(cdf, str));
                         answer = 0;
                         answer_part4 = 0;
                         break;
@@ -258,7 +258,7 @@ int main() {
                                "inferieures à cette valeur : \n");
                         scanf(" %s", str);
                         viderBuffer();
-                        result = cellsinf_cdataframe(cdf, str);
+                        printf("%d",cellsinf_cdataframe(cdf, str));
                         answer = 0;
                         answer_part4 = 0;
                         break;
