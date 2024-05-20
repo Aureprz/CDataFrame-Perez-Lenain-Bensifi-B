@@ -12,14 +12,13 @@ COLUMN *create_column(ENUM_TYPE type, char *title){
     if (col == NULL){
         return col;
     }
-    char* title2 = (char*) malloc(sizeof(char)* MAX_SIZE);
-    strcpy(title2, title);
-    col->title = title2;
+
+    col->title = title;
     col->column_type = type;
     col->data = NULL;
     col->index = NULL;
     col->valid_index = 0;
-    col->max_size = -20;
+    col->max_size = 0;
     col->size = 0;
     col->sort_dir = 0;
     return col;

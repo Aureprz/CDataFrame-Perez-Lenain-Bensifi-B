@@ -59,24 +59,20 @@ CDATAFRAME* create_cdf_user(){
 
 CDATAFRAME* create_cdf_program(){
     int size = 3;
-    ENUM_TYPE cdftype[3] ={3,3,3};
-    lnode* node = NULL;
-    COLUMN* col = NULL;
-    CDATAFRAME* cdf = create_empty_cdataframe(cdftype,size);
-    char title[] = "Colonne";
-    int i,j;
+    int i,nb_col=10;
     int cpt=0;
     int val;
-    for (i = 0 ; i < size ; i++){
-        col = create_column(*cdf->list_type,title);
-        cpt++;
-        for (j = 0 ; j < 3 ; j++){
-            val = j + cpt;
-            col->data[col->size] = (COL_TYPE *) malloc(sizeof(int));
-            *((int*)col->data[col->size]) = ((int)val);
+    ENUM_TYPE cdftype[3] ={3,3,3};
+    lnode* node = NULL;
+    CDATAFRAME* cdf = create_empty_cdataframe(cdftype,size);
+    node = cdf->list->head;
+    while (node->next!=NULL){
+        for(i =0; i < nb_col; i++){
+            val = cpt + i;
+            insert_value(node->data, &val);
         }
-        node = lst_create_lnode(col);
-        lst_insert_tail(cdf->list, node);
+        cpt++;
+        node = node->next;
     }
     return cdf;
 }
