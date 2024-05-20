@@ -311,10 +311,19 @@ void append_line_dataframe(CDATAFRAME *cdf, int pos){
     printf("La ligne a bien été ajoutée au DataFrame.\n");
 }
 
-void display_columns(CDATAFRAME* cdf, int start, int end){
+void display_columns(CDATAFRAME* cdf){
     lnode* current = cdf->list->head;
     COLUMN* col;
     int i;
+    int start=0; int end=0;
+    do{
+        printf("Choisir la position de la colonne de départ : \n");
+        scanf("%d",&start);
+    }while(start<0);
+    do{
+        printf("Choisir la position de la colonne de fin : \n");
+        scanf("%d",&end);
+    }while(end<0);
     if (end >= cdf->size){
         end = cdf->size;
     }
@@ -329,11 +338,20 @@ void display_columns(CDATAFRAME* cdf, int start, int end){
     }
 }
 
-void display_lines(CDATAFRAME* cdf, int start, int end){
+void display_lines(CDATAFRAME* cdf){
     lnode* current = cdf->list->head;
     COLUMN* col = current->data;
     unsigned long long int i;
     char str[32];
+    int start=0; int end=0;
+    do{
+        printf("Choisir la position de la colonne de départ : \n");
+        scanf("%d",&start);
+    }while(start<0);
+    do{
+        printf("Choisir la position de la colonne de fin : \n");
+        scanf("%d",&end);
+    }while(end<0);
     if (end >= col->size){
         end = cdf->size;
     }

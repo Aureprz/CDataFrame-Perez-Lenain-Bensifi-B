@@ -14,7 +14,6 @@ typedef struct cdataframe{
 }CDATAFRAME;
 
 /**
-
 @param1:  Possibles types of the soon to be CDataFrame
 @param2: Size of the CDataFrame
 */
@@ -26,6 +25,8 @@ CDATAFRAME* create_empty_cdataframe(ENUM_TYPE* cdftype,unsigned int size);
    * User gets to choose the parameters for his soon-to be Dataframe
 */
 CDATAFRAME* create_cdf_user();
+
+CDATAFRAME* create_cdf_program();
 
 /**
  * @brief: Create by itself the Dataframe
@@ -133,14 +134,6 @@ int cellsinf_cdataframe(CDATAFRAME* dataframe, void* value);
  */
 int cellssup_cdataframe(CDATAFRAME* dataframe, void* value);
 
-/**
- * @brief:  Rename a column in the CDataFrame
- * @param1: Pointer to the CDataFrame
- * @param2: Position of the column
- * @param3: New title
- * @return: 1 if there is no error 0 otherwise
- */
-int renamecolumn_cdataframe(CDATAFRAME* dataframe, int index, char* title);
 
 /**
  * @brief: Delete a selected line within the Dataframe
@@ -159,5 +152,9 @@ int column_number(CDATAFRAME* cdf);
 int line_number(CDATAFRAME* cdf);
 
 void append_column_dataframe(CDATAFRAME* cdf);
+
+void display_columns(CDATAFRAME* cdf);
+
+void display_lines(CDATAFRAME* cdf);
 
 #endif //CDATAFRAME_PEREZ_LENAIN_BENSIFI_CDATAFRAME_H
