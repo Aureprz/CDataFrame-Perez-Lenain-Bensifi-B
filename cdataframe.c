@@ -22,7 +22,7 @@ CDATAFRAME* create_cdf_user(){
     int size = 0;
     int value = 0;
     int i;
-    char* title[MAX_SIZE];
+    char title[MAX_SIZE];
     CDATAFRAME* cdf;
     COLUMN* col = NULL;
     lnode* newnode = NULL;
@@ -36,15 +36,15 @@ CDATAFRAME* create_cdf_user(){
         do {
             printf("Veuillez saisir le type de la colonne %d : \n", i+1);
             printf("UINT[1], INT[2], CHAR[3], FLOAT[4], DOUBLE[5], STRING[6], STRUCTURE[7]\n");
-            scanf(" %d", &value);
+            scanf(" %d ", &value);
         } while ((value <=0) || (value>=8));
         list_type[i] = value+1; // because NULLVAL isn't that useful
     }
     cdf = create_empty_cdataframe(list_type, size);
     for ( i = 0 ; i < size ; i++){
-        printf("Choisissez un titre pour la colonne %d : \n",i+1);
-        scanf(" %s", *title);
-        col = create_column(*cdf->list_type,*title);
+        printf("Choisissez un titre pour la colonne %d : \n ",i+1);
+        scanf(" %s ", title);
+        col = create_column(*cdf->list_type,title);
         newnode = lst_create_lnode(col);
         lst_insert_tail(cdf->list, newnode);
     }

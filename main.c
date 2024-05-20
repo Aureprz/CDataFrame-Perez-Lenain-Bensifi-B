@@ -46,7 +46,7 @@ int main() {
                 printf("\n");
                 printf("\n");
                 while ((answer_part1 < 1) || (answer_part1 > 3)) {
-                    printf("Veuillez votre choix : \n");
+                    printf("Veuillez entrer votre choix : \n");
                     scanf("%d", &answer_part1);
                     printf("\n");
                 }
@@ -54,10 +54,12 @@ int main() {
                     case 1:
                         cdf = create_cdf_user();
                         answer = 0; // permet de revenir en toute sécurité au menu précédent (principal)
+                        answer_part1 = 0;
                         break;
                     case 2:
                         cdf = create_cdf_program();
                         answer = 0;
+                        answer_part1 = 0;
                         break;
                     case 3:
                         answer = 0;

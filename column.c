@@ -11,7 +11,9 @@ COLUMN *create_column(ENUM_TYPE type, char *title){
     if (col == NULL){
         return col;
     }
-    col->title = title;
+    char* title2 = (char*) malloc(sizeof(char)* MAX_SIZE);
+    strcpy(title2, title);
+    col->title = title2;
     col->column_type = type;
     col->data = NULL;
     col->index = NULL;
