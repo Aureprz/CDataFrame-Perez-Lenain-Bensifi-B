@@ -4,6 +4,7 @@
 #include "list.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 int main(){
     CDATAFRAME* cdf=NULL;
@@ -13,7 +14,6 @@ int main(){
     int answer_part3 = 0;
     int answer_part4 = 0;
     char str[32];
-    int nb_col,nb_line;
     printf("######################################### \n");
     printf("#           Projet CDataFrame           # \n");
     printf("######################################### \n");
@@ -206,11 +206,13 @@ int main(){
             }
             switch (answer_part4){
                 case 1:
+                    int nb_col;
                     nb_col = column_number(cdf);
                     answer = 0;
                     answer_part4 = 0;
                     break;
                 case 2:
+                    int nb_line;
                     nb_line = line_number(cdf);
                     answer = 0;
                     answer_part4 = 0;

@@ -8,7 +8,7 @@
 
 // 1. Alimentation
 
-CDATAFRAME *create_empty_cdataframe(ENUM_TYPE* cdftype,unsigned int size){
+CDATAFRAME *create_empty_cdataframe(ENUM_TYPE* cdftype, int size){
     CDATAFRAME* cdf = NULL;
     cdf = (CDATAFRAME*) malloc(sizeof(CDATAFRAME));
     cdf->list = lst_create_list();
@@ -52,7 +52,7 @@ CDATAFRAME* create_cdf_user(){
 }
 
 CDATAFRAME* create_cdf_program(){
-    unsigned int size = 3;
+    int size = 3;
     ENUM_TYPE cdftype = 3;
     lnode* node = NULL;
     COLUMN* col = NULL;
@@ -170,7 +170,6 @@ void print_col_names(CDATAFRAME* cdf){
         return;
     }
     lnode* current = cdf->list->head;
-    int i;
     COLUMN* col;
     while (current->next != NULL){
         col = current->data;
@@ -181,14 +180,11 @@ void print_col_names(CDATAFRAME* cdf){
 
 void display_dataframe(CDATAFRAME* cdf){
     unsigned int i;
-    if ((cdf == NULL) || (cdf->size == 0)) {
-        return;
-    }
-    lnode *current = get_first_node(cdf->list);
-    if (current == NULL) {
+    if ((cdf == NULL) || cdf->list || cdf->size == 0) {
         printf("Dataframe vide \n");
         return;
     }
+    lnode *current = get_first_node(cdf->list);
     while (current->next != NULL) {
         print_col_names(cdf);
         current->data;
@@ -249,8 +245,6 @@ int column_number(CDATAFRAME* cdf){
         printf("Dataframe vide.");
         return cpt;
     }
-    int nb_col;
-    int i;
     lnode* current = cdf->list->head;
     char* title = current->data->title;
     while (current->next != NULL){
@@ -282,7 +276,7 @@ void replace_value_cdf(CDATAFRAME *cdf){
         return;
     }
     int i;
-    unsigned int tmp = 0; // tmp will be used to keep the column size
+    unsigned int tmp; // tmp will be used to keep the column size
     lnode *node = cdf->list->head;
     COLUMN *col = NULL;
     int row_location=0;
@@ -356,7 +350,6 @@ void append_line_dataframe(CDATAFRAME *cdf){
     lnode* node = cdf->list->head;
     COLUMN* col = node->data;
     int i;
-    void* val;
     for (i = 0 ; i < cdf->size; i++){
         printf("Colonne \" %s \" \n",col->title);
         insert_user_val(col);

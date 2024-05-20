@@ -18,7 +18,7 @@ typedef struct cdataframe{
 @param2: Size of the CDataFrame
 */
 
-CDATAFRAME* create_empty_cdataframe(ENUM_TYPE* cdftype,unsigned int size);
+CDATAFRAME* create_empty_cdataframe(ENUM_TYPE* cdftype,int size);
 
 
 /**
@@ -36,11 +36,6 @@ CDATAFRAME* create_cdf_program();
 
 void print_col_names(CDATAFRAME* cdf);
 
-/**
- * @brief:  Shows the totality of the CDataFrame
- * @param1: Pointer to the CDataFrame
- */
-void show_cdataframe(CDATAFRAME* dataframe);
 
 /**
  * @brief: Replace a value within the Dataframe
@@ -91,7 +86,6 @@ int cellsinf_cdataframe(CDATAFRAME* dataframe, void* value);
  * @param2: User's value
  */
 
-int cellssup_cdataframe(CDATAFRAME* dataframe, void* value);
 
 void display_dataframe(CDATAFRAME* cdf);
 
