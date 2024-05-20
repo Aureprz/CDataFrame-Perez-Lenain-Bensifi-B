@@ -8,8 +8,9 @@
 
 // 1. Alimentation
 
-CDATAFRAME *create_empty_cdataframe(ENUM_TYPE *cdftype,unsigned int size){
-    CDATAFRAME  *cdf = (CDATAFRAME*) malloc(sizeof(CDATAFRAME));
+CDATAFRAME *create_empty_cdataframe(ENUM_TYPE* cdftype,unsigned int size){
+    CDATAFRAME* cdf = NULL;
+    cdf = (CDATAFRAME*) malloc(sizeof(CDATAFRAME));
     cdf->list = lst_create_list();
     cdf->list_type =  cdftype;
     cdf->size = size;
@@ -46,6 +47,22 @@ CDATAFRAME* create_cdf_user(){
         col = create_column(*cdf->list_type,*title);
         newnode = lst_create_lnode(col);
         lst_insert_tail(cdf->list, newnode);
+    }
+    return cdf;
+}
+
+CDATAFRAME* create_cdf_program(){
+    unsigned int size = 3;
+    ENUM_TYPE cdftype = 3;
+    lnode* node = NULL;
+    COLUMN* col = NULL;
+    CDATAFRAME* cdf = create_empty_cdataframe(&cdftype,size);
+    int i,j;
+    for (i = 0 ; i < size ; i++){
+        char title[] = {'C', 'o', 'l', 'l', 'o', 'n', 'n', 'e', i};
+        col = create_column(*cdf->list_type,title);
+        node = lst_create_lnode(col);
+        lst_insert_tail(cdf->list, node);
     }
     return cdf;
 }
@@ -143,7 +160,7 @@ void print_col_names(CDATAFRAME* cdf){
     COLUMN* col;
     while (current->next != NULL){
         col = current->data;
-        printf("| %.20s |",col->title);
+        printf("| %-20.20s |",col->title);
         current = current->next;
     }
 }
@@ -292,4 +309,39 @@ void append_line_dataframe(CDATAFRAME *cdf, int pos){
         node = node->next;
     }
     printf("La ligne a bien été ajoutée au DataFrame.\n");
+}
+
+void display_columns(CDATAFRAME* cdf, int start, int end){
+    lnode* current = cdf->list->head;
+    COLUMN* col;
+    int i;
+    if (end >= cdf->size){
+        end = cdf->size;
+    }
+    for (i = 0 ; i < start ; i++){
+        current = current->next;
+    }
+    current = current->next;
+    col = current->data;
+    for (i = start ; i < end ; i++){
+        printf("| %-20.20s |\n",col->title);
+        print_col(col);
+    }
+}
+
+void display_lines(CDATAFRAME* cdf, int start, int end){
+    lnode* current = cdf->list->head;
+    COLUMN* col = current->data;
+    unsigned long long int i;
+    char str[32];
+    if (end >= col->size){
+        end = cdf->size;
+    }
+    for (i = start ; i < end ; i++){
+        convert_value(col,i,str,32);
+        printf("|  %s  |\n",col->title);
+        printf("|  %s  |", str);
+        printf("\n");
+        current = current->next;
+    }
 }
