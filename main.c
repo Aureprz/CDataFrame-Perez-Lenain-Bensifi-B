@@ -178,7 +178,7 @@ int main() {
                         scanf(" %s", str);
                         viderBuffer();
                         result = cellexist_cdataframe(cdf, str);
-                        if result == 1{
+                        if (result == 1){
                             printf("La valeur existe\n");
                         }
                         else{
