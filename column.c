@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 COLUMN *create_column(ENUM_TYPE type, char *title){
     COLUMN* col = NULL;
     col = (COLUMN*) malloc(sizeof(COLUMN));
@@ -38,8 +39,6 @@ COLUMN* create_col_user(){
     type = i;
     return create_column(type, title);
 }
-
-
 
 
 int insert_user_val(COLUMN *col){

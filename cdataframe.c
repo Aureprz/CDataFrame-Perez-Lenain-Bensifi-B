@@ -225,7 +225,7 @@ void delete_column_cdf(CDATAFRAME *cdf, char *col_name){
         }
         node = node->next;
     }
-    printf("La colonne \" %s \" n'a pas été trouvée dans le DataFrame. \n", col_name);
+    printf("La colonne \" %s \" n'a pas ete trouvee dans le DataFrame. \n", col_name);
 }
 
 void delete_cdf_line(CDATAFRAME *cdf){
@@ -235,7 +235,7 @@ void delete_cdf_line(CDATAFRAME *cdf){
     }
     int pos=0;
     do{
-        printf("Choisissez la position à laquelle vous souhaitez retirer une ligne : \n");
+        printf("Choisissez la position a laquelle vous souhaitez retirer une ligne : \n");
         scanf("%d",&pos);
     }while(pos<=0);
     lnode *node = cdf->list->head;
@@ -288,11 +288,11 @@ void replace_value_cdf(CDATAFRAME *cdf){
     int row_location=0;
     int col_location=0;
     do{
-        printf("Choisissez la ligne où vous souhaitez remplacer la valeur : \n");
+        printf("Choisissez la ligne ou vous souhaitez remplacer la valeur : \n");
         scanf("%d",&row_location);
     }while(row_location<=0);
     do{
-        printf("Choisissez la colonne où vous souhaitez remplacer la valeur : \n");
+        printf("Choisissez la colonne ou vous souhaitez remplacer la valeur : \n");
         scanf("%d",&col_location);
     }while(col_location<=0);
     if (col_location >= cdf->size){
@@ -307,7 +307,7 @@ void replace_value_cdf(CDATAFRAME *cdf){
     printf("Saisissez la nouvelle valeur que vous souhaitez : \n");
     insert_user_val(col);
     col->size = tmp;
-    printf("La valeur a bien été remplacée.\n");
+    printf("La valeur a bien ete remplacee.\n");
 }
 
 void append_column_dataframe(CDATAFRAME* cdf){
@@ -322,7 +322,7 @@ void append_column_dataframe(CDATAFRAME* cdf){
     col = create_col_user();
     lnode* node = lst_create_lnode(col);
     do{
-        printf("Choisissez la position à laquelle vous souhaitez rajouter une colonne : \n");
+        printf("Choisissez la position a laquelle vous souhaitez rajouter une colonne : \n");
         scanf("%d",&pos);
     }while(pos<=0);
     for (i = 0 ; i < cdf->size ; i++){
@@ -340,7 +340,7 @@ void append_column_dataframe(CDATAFRAME* cdf){
             return;
         }
     }
-    printf("La colonne \" %s \" a bien été ajoutée à la position %d dans le DataFrame.\n",col->title,pos);
+    printf("La colonne \" %s \" a bien ete ajoutee à la position %d dans le DataFrame.\n",col->title,pos);
 }
 
 void append_line_dataframe(CDATAFRAME *cdf){
@@ -350,7 +350,7 @@ void append_line_dataframe(CDATAFRAME *cdf){
     }
     int pos=0;
     do{
-        printf("Choisissez la position à laquelle vous souhaitez rajouter une ligne : \n");
+        printf("Choisissez la position a laquelle vous souhaitez rajouter une ligne : \n");
         scanf("%d",&pos);
     }while(pos<=0);
     lnode* node = cdf->list->head;
@@ -361,7 +361,7 @@ void append_line_dataframe(CDATAFRAME *cdf){
         insert_user_val(col);
         node = node->next;
     }
-    printf("La ligne a bien été ajoutée au DataFrame.\n");
+    printf("La ligne a bien ete ajoutee au DataFrame.\n");
 }
 
 void display_columns(CDATAFRAME* cdf){
@@ -374,7 +374,7 @@ void display_columns(CDATAFRAME* cdf){
     int i;
     int start=0; int end=0;
     do{
-        printf("Choisir la position de la colonne de départ : \n");
+        printf("Choisir la position de la colonne de depart : \n");
         scanf("%d",&start);
     }while(start<0);
     do{

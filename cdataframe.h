@@ -14,20 +14,25 @@ typedef struct cdataframe{
 }CDATAFRAME;
 
 /**
-@param1:  Possibles types of the soon to be CDataFrame
-@param2: Size of the CDataFrame
+* @param1:  Possibles types of the soon to be CDataFrame
+* @param2: Size of the CDataFrame
+* @return: Pointer to the DataFrame
 */
 
 CDATAFRAME* create_empty_cdataframe(ENUM_TYPE* cdftype,int size);
 
 
 /**
-   * User gets to choose the parameters for his soon-to be Dataframe
+* @brief: User gets to choose the parameters for his soon-to be Dataframe
+* @return: Pointer to the Dataframe
 */
 CDATAFRAME* create_cdf_user();
 
+/**
+ * @brief: Create a DataFrame by the program
+ * @return: Pointer to the DataFrame
+ */
 CDATAFRAME* create_cdf_program();
-
 
 /**
  * @brief: Printout each column name
@@ -87,25 +92,69 @@ int cellsinf_cdataframe(CDATAFRAME* dataframe, void* value);
  * @param2: User's value
  */
 
-
+/**
+ * @brief: Display the entire DataFrame
+ * @param: cdf
+ */
 void display_dataframe(CDATAFRAME* cdf);
 
+/**
+ * @brief: Rename a column in the DataFrame
+ * @param1: Pointer to the DataFrame
+ * @param2: Title to be replaced
+ */
 void rename_col(CDATAFRAME* cdf, char* title_replaced);
 
+
+/**
+ * @brief: Delete a column in the DataFrame
+ * @param1: Pointer to the DataFrame
+ * @param2: Column name to be deleted
+ */
 void delete_column_cdf(CDATAFRAME *cdf, char *col_name);
 
+/**
+ * @brief: Delete a line within the DataFrame
+ * @param: Pointer to the DataFrame
+ */
 void delete_cdf_line(CDATAFRAME *cdf);
 
+/**
+ * @brief: Gives the user the number of columns the DataFrame holds
+ * @param: Pointer to the DataFrame
+ * @return: The number of columns within the DataFrame
+ */
 int column_number(CDATAFRAME* cdf);
 
+/**
+ * @brief: Gives the user the number of lines the DataFrame holds
+ * @param: Pointer to the DataFrame
+ * @return: The number of lines within the DataFrame
+ */
 int line_number(CDATAFRAME* cdf);
 
+/**
+ * @brief: Adds a column in a certain position within the DataFrame
+ * @param: Pointer to the DataFrame
+ */
 void append_column_dataframe(CDATAFRAME* cdf);
 
+/**
+ * @brief: Adds a line in a certain position within the DataFrame
+ * @param: Pointer to the DataFrame
+ */
 void append_line_dataframe(CDATAFRAME *cdf);
 
+/**
+ * @brief: Display a certain number of columns
+ * @param: Pointer to the DataFrame
+ */
 void display_columns(CDATAFRAME* cdf);
 
+/**
+ * @brief: Display a certain number of lines
+ * @param: Pointer to the DataFrame
+ */
 void display_lines(CDATAFRAME* cdf);
 
 #endif //CDATAFRAME_PEREZ_LENAIN_BENSIFI_CDATAFRAME_H
