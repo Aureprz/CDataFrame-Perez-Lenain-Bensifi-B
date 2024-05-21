@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "list.h"
 #include <string.h>
-
+#include "sort.h"
 #define MAX_SIZE 20
 
 // 1. Alimentation
@@ -360,19 +360,30 @@ void append_line_dataframe(CDATAFRAME *cdf){
         printf("Dataframe vide.");
         return;
     }
+
     int pos=0;
+    unsigned long long int i, temp;
+    lnode* current = cdf->list->head;
+    COLUMN* col = current->data;
     do{
         printf("Choisissez la position a laquelle vous souhaitez rajouter une ligne : \n");
         scanf("%d",&pos);
-    }while(pos<=0);
-    lnode* node = cdf->list->head;
-    COLUMN* col = node->data;
-    int i;
-    for (i = 0 ; i < cdf->size; i++){
-        printf("Colonne \" %s \" \n",col->title);
+    }while(pos<0 || pos > col->size);
+
+    printf("Colonne \" %s \" \n",col->title);
+    while(current->next != NULL){
         insert_user_val(col);
-        node = node->next;
+        if(col->index == NULL)
+            create_index(col);
+        for (i = col->size ; i > pos; i--) {
+            temp = col->index[i-2];
+            col->index[i-2] = col->index[i-1];
+        }
+        col->index[col->size-1] = temp;
+        current = current->next;
+        col = current->data;
     }
+
     printf("La ligne a bien ete ajoutee au DataFrame.\n");
 }
 
