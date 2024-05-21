@@ -88,4 +88,6 @@ lnode *get_next_node(dllist * lst, lnode * lnode);
 */
 void *get_previous_elem(dllist * lst, lnode * lnode);
 
+void *get_elem_index(dllist * lst, int index);
+
 #endif //CDATAFRAME_PEREZ_LENAIN_BENSIFI_LIST_H

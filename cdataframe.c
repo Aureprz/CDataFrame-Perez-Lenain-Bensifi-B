@@ -13,14 +13,17 @@ CDATAFRAME *create_empty_cdataframe(ENUM_TYPE* cdftype, int size){
     COLUMN* col = NULL;
     lnode* newnode = NULL;
     char title[MAX_SIZE];
+    int error;
     cdf = (CDATAFRAME*) malloc(sizeof(CDATAFRAME));
     cdf->list = lst_create_list();
     cdf->list_type =  cdftype;
     cdf->size = size;
     for(int i= 0; i < size; i++){
-        printf("Choisissez un titre pour la colonne %d : \n ",i+1);
-        scanf(" %s", title);
-        viderBuffer();
+        do {
+            printf("Choisissez un titre pour la colonne %d : \n ", i + 1);
+            error = lire(title, MAX_SIZE);
+            viderBuffer();
+        }while (!error);
         col = create_column(*cdf->list_type,title);
         newnode = lst_create_lnode(col);
         lst_insert_tail(cdf->list, newnode);
@@ -58,21 +61,25 @@ CDATAFRAME* create_cdf_user(){
 }
 
 CDATAFRAME* create_cdf_program(){
-    int size = 3;
-    int i,nb_col=10;
+    int nb_col = 3;
+    int i,nb_line=10;
     int cpt=0;
     int val;
     ENUM_TYPE cdftype[3] ={3,3,3};
     lnode* node = NULL;
-    CDATAFRAME* cdf = create_empty_cdataframe(cdftype,size);
+    CDATAFRAME* cdf = create_empty_cdataframe(cdftype,nb_col);
     node = cdf->list->head;
     while (node->next!=NULL){
-        for(i =0; i < nb_col; i++){
+        for(i =0; i < nb_line; i++){
             val = cpt + i;
             insert_value(node->data, &val);
         }
         cpt++;
         node = node->next;
+    }
+    for(i =0; i < nb_line; i++){
+        val = cpt + i;
+        insert_value(node->data, &val);
     }
     return cdf;
 }
@@ -175,9 +182,12 @@ void print_col_names(CDATAFRAME* cdf){
     COLUMN* col;
     while (current->next != NULL){
         col = current->data;
-        printf("| %-20.20s |",col->title);
+        printf("|%26s|",col->title);
         current = current->next;
     }
+    col = current->data;
+    printf("|%26s|",col->title);
+    printf("\n");
 }
 
 void display_dataframe(CDATAFRAME* cdf){
@@ -187,17 +197,23 @@ void display_dataframe(CDATAFRAME* cdf){
         return;
     }
     lnode *current = get_first_node(cdf->list);
-    while (current->next != NULL) {
-        print_col_names(cdf);
-        current->data;
-        current = get_next_node(cdf->list, current);
-    }
-    for (i = 0 ; i < cdf->nb_line ; i++) {
+    print_col_names(cdf);
+    for (i = 0 ; i < cdf->list->head->data->size ; i++) {
         current = get_first_node(cdf->list);
         while (current->next != NULL) {
-            print_val_in_col(current->data, i);
+            if (current->data->size > i)
+                print_val_in_col(current->data, i);
+            else
+                printf("NULL");
+            printf("|");
             current = get_next_node(cdf->list, current);
         }
+        if (current->data->size > i)
+            print_val_in_col(current->data, i);
+        else
+            printf("NULL");
+        printf("|");
+        printf("\n");
     }
     printf("\n");
 }
@@ -365,30 +381,48 @@ void display_columns(CDATAFRAME* cdf){
         printf("Dataframe vide.");
         return;
     }
-    lnode* current = cdf->list->head;
+    lnode* current = NULL;
     COLUMN* col;
-    int i;
-    int start=0; int end=0;
+    unsigned long long j;
+    int start=0; int end=0,i , error;
     do{
-        printf("Choisir la position de la colonne de depart : \n");
-        scanf("%d",&start);
-    }while(start<0);
+        printf("Choisir la position de la colone de depart [max: %d]: \n",cdf->size-1);
+        error = scanf("%d",&start);
+    }while(!(error) || (start < 0) || (start >= cdf->size));
     do{
-        printf("Choisir la position de la colonne de fin : \n");
-        scanf("%d",&end);
-    }while(end<0);
-    if (end >= cdf->size){
-        end = cdf->size;
-    }
-    for (i = 0 ; i < start ; i++){
-        current = current->next;
-    }
-    current = current->next;
+        printf("Choisir la position de la colone de fin [max: %u]: \n",cdf->size-1);
+        error = scanf("%d",&end);
+    }while(!(error) || (end < start) || (end>= cdf->size));
+
+    current = get_elem_index(cdf->list, start);
     col = current->data;
+
     for (i = start ; i < end ; i++){
-        printf("| %-20.20s |\n",col->title);
-        print_col(col);
+        printf("|%26s|",col->title);
+        current = current->next;
+        col = current->data;
     }
+    printf("|%26s|",col->title);
+    printf("\n");
+
+    for (j = 0 ; j < cdf->list->head->data->size ; j++) {
+        current = get_elem_index(cdf->list, start);
+        for (i = start ; i < end ; i++){
+            if (current->data->size > i)
+                print_val_in_col(current->data, j);
+            else
+                printf("|NULL                      |");
+            printf("|");
+            current = get_next_node(cdf->list, current);
+        }
+        if (current->data->size > j)
+            print_val_in_col(current->data, j);
+        else
+            printf("|NULL");
+        printf("|");
+        printf("\n");
+    }
+    printf("\n");
 }
 
 void display_lines(CDATAFRAME* cdf){
@@ -398,27 +432,39 @@ void display_lines(CDATAFRAME* cdf){
     }
     lnode* current = cdf->list->head;
     COLUMN* col = current->data;
-    unsigned long long int i;
+    unsigned long long int start=0, end=0, i;
     char str[32];
-    int start=0; int end=0;
+    int error;
     do{
-        printf("Choisir la position de la ligne de départ : \n");
-        scanf("%d",&start);
-    }while(start<0);
+        printf("Choisir la position de la ligne de depart [max: %d]: \n",col->size-1);
+        error = scanf("%llu",&start);
+    }while(!(error) || (start >= col->size));
     do{
-        printf("Choisir la position de la ligne de fin : \n");
-        scanf("%d",&end);
-    }while(end<0);
-    if (end >= col->size){
-        end = cdf->size;
-    }
-    for (i = start ; i < end ; i++){
-        convert_value(col,i,str,32);
-        printf("|  %s  |\n",col->title);
-        printf("|  %s  |", str);
+        printf("Choisir la position de la ligne de fin [max: %u]: \n",col->size-1);
+        error = scanf("%llu",&end);
+    }while(!(error) || (end>= col->size));
+
+
+    print_col_names(cdf);
+    printf("\n");
+    for (i = start ; i <= end ; i++) {
+        current = get_first_node(cdf->list);
+        while (current->next != NULL) {
+            if (current->data->size > i)
+                print_val_in_col(current->data, i);
+            else
+                printf("NULL");
+            printf("|");
+            current = get_next_node(cdf->list, current);
+        }
+        if (current->data->size > i)
+            print_val_in_col(current->data, i);
+        else
+            printf("|NULL                      |");
+        printf("|");
         printf("\n");
-        current = current->next;
     }
+    printf("\n");
 }
 
 void viderBuffer()
@@ -427,5 +473,27 @@ void viderBuffer()
     while (c != '\n' && c != EOF)
     {
         c = getchar();
+    }
+}
+
+int lire(char *chaine, int longueur)
+{
+    char *positionEntree = NULL;
+    if (fgets(chaine, longueur, stdin) != NULL)
+    {
+        positionEntree = strchr(chaine, '\n');
+        if (positionEntree != NULL)
+        {
+            *positionEntree = '\0';
+        }
+        if (strlen(chaine) == 0)
+        {
+            strcpy(chaine, "Pas de nom");
+        }
+        return 1;
+    }
+    else
+    {
+        return 0;
     }
 }

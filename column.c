@@ -1,4 +1,4 @@
-#define MAX_SIZE 32
+#define MAX_SIZE 20
 #include "sort.h"
 #include "column.h"
 #include <stdio.h>
@@ -13,7 +13,13 @@ COLUMN *create_column(ENUM_TYPE type, char *title){
         return col;
     }
 
-    col->title = title;
+
+    col->title = (char *) malloc(MAX_SIZE  * sizeof(char));
+    if (col->title == NULL) {
+        free(col);
+        return NULL;
+    }
+    strcpy(col->title, title);
     col->column_type = type;
     col->data = NULL;
     col->index = NULL;
@@ -211,12 +217,12 @@ void print_col(COLUMN* col){
 
 void print_val_in_col(COLUMN* col , unsigned long long int index){
     if (col == NULL ||index >= col->size){
-        printf("Index incorrect \n");
+        printf("Index incorrect ");
         return;
     }
     char str[MAX_SIZE];
     convert_value(col, index, str, MAX_SIZE);
-    printf("[%llu] %-20.20s \n", index, str);
+    printf("|[%3llu] %20s", index, str);
 }
 
 int exist_col(COLUMN* col, char *value){

@@ -126,3 +126,15 @@ void *get_previous_elem(dllist * lst, lnode * lnode) {
         return NULL;
     return lnode->prev;
 }
+
+void *get_elem_index(dllist * lst, int index){
+    if (lst == NULL|| lst->head == NULL)
+        return NULL;
+    int i = 0;
+    lnode* current = lst->head;
+    while (current->next !=NULL && (i < index)){
+        current = current->next;
+        i++;
+    }
+    return current;
+}

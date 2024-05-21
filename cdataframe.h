@@ -157,4 +157,6 @@ void display_columns(CDATAFRAME* cdf);
  */
 void display_lines(CDATAFRAME* cdf);
 
+int lire(char *chaine, int longueur);
+
 #endif //CDATAFRAME_PEREZ_LENAIN_BENSIFI_CDATAFRAME_H
