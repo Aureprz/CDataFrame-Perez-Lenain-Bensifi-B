@@ -572,3 +572,15 @@ void display_dataframe_by_index(CDATAFRAME* cdf){
     }
     printf("\n");
 }
+
+void sort_cdf(CDATAFRAME *cdf){
+    if ((cdf == NULL) || cdf->list == NULL || cdf->size == 0) {
+        printf("Dataframe vide \n");
+        return;
+    }
+    lnode * current = get_first_node(cdf->list);
+    while (current->next != NULL) {
+        update_index(current->data);
+        current = current->next;
+    }
+}
