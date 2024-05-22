@@ -397,11 +397,11 @@ void display_columns(CDATAFRAME* cdf){
     unsigned long long j;
     int start=0; int end=0,i , error;
     do{
-        printf("Choisir la position de la colone de depart [max: %d]: \n",cdf->size-1);
+        printf("Choisissez la position de la colonne de depart [min: %u]: \n",cdf->size-1);
         error = scanf("%d",&start);
     }while(!(error) || (start < 0) || (start >= cdf->size));
     do{
-        printf("Choisir la position de la colone de fin [max: %u]: \n",cdf->size-1);
+        printf("Choisissez la position de la colonne de fin [max: %u]: \n",cdf->size-1);
         error = scanf("%d",&end);
     }while(!(error) || (end < start) || (end>= cdf->size));
 
@@ -499,7 +499,7 @@ int lire(char *chaine, int longueur)
         }
         if (strlen(chaine) == 0)
         {
-            strcpy(chaine, "Pas de nom");
+            strcpy(chaine, "Pas de nom. \n");
         }
         return 1;
     }

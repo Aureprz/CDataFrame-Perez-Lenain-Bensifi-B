@@ -94,7 +94,7 @@ int cellsinf_cdataframe(CDATAFRAME* dataframe, void* value);
 
 /**
  * @brief: Display the entire DataFrame
- * @param: cdf
+ * @param1: Pointer to the DataFrame
  */
 void display_dataframe(CDATAFRAME* cdf);
 
@@ -115,7 +115,7 @@ void delete_column_cdf(CDATAFRAME *cdf, char *col_name);
 
 /**
  * @brief: Delete a line within the DataFrame
- * @param: Pointer to the DataFrame
+ * @param1: Pointer to the DataFrame
  */
 void delete_cdf_line(CDATAFRAME *cdf);
 
@@ -128,40 +128,46 @@ int column_number(CDATAFRAME* cdf);
 
 /**
  * @brief: Gives the user the number of lines the DataFrame holds
- * @param: Pointer to the DataFrame
+ * @param1: Pointer to the DataFrame
  * @return: The number of lines within the DataFrame
  */
 int line_number(CDATAFRAME* cdf);
 
 /**
  * @brief: Adds a column in a certain position within the DataFrame
- * @param: Pointer to the DataFrame
+ * @param1: Pointer to the DataFrame
  */
 void append_column_dataframe(CDATAFRAME* cdf);
 
 /**
  * @brief: Adds a line in a certain position within the DataFrame
- * @param: Pointer to the DataFrame
+ * @param1: Pointer to the DataFrame
  */
 void append_line_dataframe(CDATAFRAME *cdf);
 
 /**
  * @brief: Display a certain number of columns
- * @param: Pointer to the DataFrame
+ * @param1: Pointer to the DataFrame
  */
 void display_columns(CDATAFRAME* cdf);
 
 /**
  * @brief: Display a certain number of lines
- * @param: Pointer to the DataFrame
+ * @param1: Pointer to the DataFrame
  */
 void display_lines(CDATAFRAME* cdf);
 
+/**
+ * @brief: Allows the program to delete '\0' at the end of inputs
+ * @param1: Input in the form of a string
+ * @param2: Lenght of the string
+ * @return: Either 0 if there's no problem, 1 otherwise
+ */
 int lire(char *chaine, int longueur);
 
 /**
  * @brief: Allows the user to choose a column within the DataFrame and to sort it (either in ASC or DESC order)
- * @param: Pointer to the DataFrame
+ * @param1: Pointer to the DataFrame
  */
 void sort_column_in_cdf(CDATAFRAME* cdf);
 
