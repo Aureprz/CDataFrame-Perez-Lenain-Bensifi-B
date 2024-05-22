@@ -101,10 +101,11 @@ int insert_value(COLUMN *col, void *value){
     if (col->size >= col->max_size) {
         if (col->max_size == 0) {
             col->data = malloc(32 * sizeof(COL_TYPE));
-            col->index = malloc(32 * sizeof(unsigned long long int ));
         } else {
             realloc(col->data, (col->max_size + 32) * sizeof(COL_TYPE));
-            realloc(col->index, (col->max_size + 32) * sizeof(unsigned long long int ));
+            if (col->index != NULL){
+                realloc(col->index, (col->max_size + 32) * sizeof(unsigned long long int ));
+            }
         }
         col->max_size += 32;
         if (col->data == NULL) {
@@ -114,7 +115,9 @@ int insert_value(COLUMN *col, void *value){
 
     if(value == NULL){
         col->data[col->size] = NULL;
-        col->index[col->size] = col->size;
+        if (col->index != NULL){
+            col->index[col->size] = col->size;
+        }
         col->size++;
 
         return 1;

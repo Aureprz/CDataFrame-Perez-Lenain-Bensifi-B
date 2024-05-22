@@ -531,10 +531,49 @@ void sort_column_in_cdf(CDATAFRAME* cdf){
                 printf("0 - Ordre ascendant/croissant \n");
                 printf("1 - Ordre descendant/décroissant \n");
                 scanf("%d", &sort_order);
-            }while((sort_order != 0)||(sort_order!=1));
+            }while((sort_order != 0) && (sort_order!=1));
             sort(current->data,sort_order);
             return;
         }
         current = current->next;
     }
+}
+
+
+void display_dataframe_by_index(CDATAFRAME* cdf){
+    unsigned int i;
+    if ((cdf == NULL) || cdf->list == NULL || cdf->size == 0) {
+        printf("Dataframe vide \n");
+        return;
+    }
+    print_col_names(cdf);
+    for (i = 0 ; i < cdf->list->head->data->size ; i++) {
+        lnode * current = get_first_node(cdf->list);
+        while (current->next != NULL) {
+            if (current->data->size > i)
+                if(current->data->index != NULL) {
+                    print_val_in_col(current->data, current->data->index[i]);
+                }
+                else{
+                    print_val_in_col(current->data, i);
+                }
+
+            else
+                printf("NULL");
+            printf("|");
+            current = get_next_node(cdf->list, current);
+        }
+        if (current->data->size > i)
+            if(current->data->index != NULL) {
+                print_val_in_col(current->data, current->data->index[i]);
+            }
+            else{
+                print_val_in_col(current->data, i);
+            }
+        else
+            printf("NULL");
+        printf("|");
+        printf("\n");
+    }
+    printf("\n");
 }

@@ -165,4 +165,7 @@ int lire(char *chaine, int longueur);
  */
 void sort_column_in_cdf(CDATAFRAME* cdf);
 
+
+void display_dataframe_by_index(CDATAFRAME* cdf)
+
 #endif //CDATAFRAME_PEREZ_LENAIN_BENSIFI_CDATAFRAME_H
