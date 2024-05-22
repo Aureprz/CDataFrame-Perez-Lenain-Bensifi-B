@@ -494,7 +494,7 @@ int lire(char *chaine, int longueur)
         }
         if (strlen(chaine) == 0)
         {
-            strcpy(chaine, "|               Pas de nom |");
+            strcpy(chaine, "Pas de nom");
         }
         return 1;
     }
