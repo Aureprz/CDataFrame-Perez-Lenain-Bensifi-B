@@ -170,6 +170,10 @@ int lire(char *chaine, int longueur);
  */
 void sort_column_in_cdf(CDATAFRAME* cdf);
 
+/**
+ * @brief: Sort the DataFrame
+ * @param1: Pointer to the DataFRame
+ */
 void sort_cdf(CDATAFRAME *cdf);
 
 void display_dataframe_by_index(CDATAFRAME* cdf);

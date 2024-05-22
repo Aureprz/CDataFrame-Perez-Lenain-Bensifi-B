@@ -239,11 +239,13 @@ int main() {
                 switch (answer_part4) {
                     case 1:
                         result = column_number(cdf);
+                        printf("Votre DataFrame comporte actuellement %d colonnes. \n");
                         answer = 0;
                         answer_part4 = 0;
                         break;
                     case 2:
                         result = line_number(cdf);
+                        printf("Votre DataFrame comporte actuellement %d lignes. \n");
                         answer = 0;
                         answer_part4 = 0;
                         break;

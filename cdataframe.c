@@ -494,7 +494,7 @@ int lire(char *chaine, int longueur)
         }
         if (strlen(chaine) == 0)
         {
-            strcpy(chaine, "Pas de nom. \n");
+            strcpy(chaine, "Pas de nom \n");
         }
         return 1;
     }
@@ -524,7 +524,7 @@ void sort_column_in_cdf(CDATAFRAME* cdf){
             printf("Dans quel ordre souhaitez-vous trier les données de la colonne ? \n");
             do{
                 printf("0 - Ordre ascendant/croissant \n");
-                printf("1 - Ordre descendant/décroissant \n");
+                printf("1 - Ordre descendant/decroissant \n");
                 scanf("%d", &sort_order);
             }while((sort_order != 0) && (sort_order!=1));
             (current->data,sort_order);
