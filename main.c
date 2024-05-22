@@ -132,7 +132,8 @@ int main() {
                 printf("7 - Remplacer la valeur se trouvant dans une cellule du DataFrame \n");
                 printf("8 - Afficher le nom de chaque colonne \n");
                 printf("9 - Trier les valeurs comprises dans la colonne \n");
-                printf("10 - Retour au menu precedent \n");
+                printf("10 - Trier le DataFrame \n");
+                printf("11 - Retour au menu precedent \n");
                 printf("\n");
                 printf("\n");
                 while (answer_part3 < 1 || answer_part3 > 9) {
@@ -204,6 +205,11 @@ int main() {
                         answer_part3 = 0;
                         break;
                     case 10:
+                        sort_cdf(cdf);
+                        answer = 0;
+                        answer_part3 = 0;
+                        break;
+                    case 11:
                         answer = 0;
                         answer_part3 = 0;
                         break;
