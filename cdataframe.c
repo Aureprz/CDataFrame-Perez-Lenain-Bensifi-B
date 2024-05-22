@@ -36,10 +36,7 @@ CDATAFRAME* create_cdf_user(){
     int size = 0;
     int value = 0;
     int i;
-    char title[MAX_SIZE];
     CDATAFRAME* cdf;
-    COLUMN* col = NULL;
-    lnode* newnode = NULL;
     do{
         printf("Veuillez saisir le nombre de colonnes de votre CDataFrame : \n");
         scanf("%d", &size);
@@ -196,10 +193,9 @@ void display_dataframe(CDATAFRAME* cdf){
         printf("Dataframe vide \n");
         return;
     }
-    lnode *current = get_first_node(cdf->list);
     print_col_names(cdf);
     for (i = 0 ; i < cdf->list->head->data->size ; i++) {
-        current = get_first_node(cdf->list);
+        lnode *current = get_first_node(cdf->list);
         while (current->next != NULL) {
             if (current->data->size > i)
                 print_val_in_col(current->data, i);
@@ -444,7 +440,6 @@ void display_lines(CDATAFRAME* cdf){
     lnode* current = cdf->list->head;
     COLUMN* col = current->data;
     unsigned long long int start=0, end=0, i;
-    char str[32];
     int error;
     do{
         printf("Choisir la position de la ligne de depart [max: %d]: \n",col->size-1);
@@ -532,7 +527,7 @@ void sort_column_in_cdf(CDATAFRAME* cdf){
                 printf("1 - Ordre descendant/décroissant \n");
                 scanf("%d", &sort_order);
             }while((sort_order != 0) && (sort_order!=1));
-            sort(current->data,sort_order);
+            (current->data,sort_order);
             return;
         }
         current = current->next;
