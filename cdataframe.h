@@ -159,4 +159,10 @@ void display_lines(CDATAFRAME* cdf);
 
 int lire(char *chaine, int longueur);
 
+/**
+ * @brief: Allows the user to choose a column within the DataFrame and to sort it (either in ASC or DESC order)
+ * @param: Pointer to the DataFrame
+ */
+void sort_column_in_cdf(CDATAFRAME* cdf);
+
 #endif //CDATAFRAME_PEREZ_LENAIN_BENSIFI_CDATAFRAME_H

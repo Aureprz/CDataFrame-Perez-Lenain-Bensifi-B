@@ -508,3 +508,33 @@ int lire(char *chaine, int longueur)
         return 0;
     }
 }
+
+void sort_column_in_cdf(CDATAFRAME* cdf){
+    int i,pos=0;
+    int sort_order=-1;
+    if ((cdf == NULL) || (cdf->list == NULL)){
+        printf("Dataframe vide. \n");
+        return;
+    }
+    lnode* current = cdf->list->head;
+    do{
+        printf("Entrez la position de la colonne que vous souhaitez trier : \n");
+        scanf("%d", &pos);
+    }while(pos <= 0);
+    if (pos >= cdf->size){
+        pos = cdf->size;
+    }
+    for (i = 0 ; i < cdf->size ; i++){
+        if (i == pos){
+            printf("Dans quel ordre souhaitez-vous trier les données de la colonne ? \n");
+            do{
+                printf("0 - Ordre ascendant/croissant \n");
+                printf("1 - Ordre descendant/décroissant \n");
+                scanf("%d", &sort_order);
+            }while((sort_order != 0)||(sort_order!=1));
+            sort(current->data,sort_order);
+            return;
+        }
+        current = current->next;
+    }
+}
