@@ -1,10 +1,6 @@
-#include "sort.h"
-#include "column.h"
 #include "cdataframe.h"
-#include "list.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include <stdio.h>
+
 
 int main() {
     CDATAFRAME *cdf = NULL;
