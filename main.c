@@ -82,6 +82,7 @@ int main() {
                 printf("2 - Afficher seulement certaine(s) ligne(s) du DataFrame \n");
                 printf("3 - Afficher une colonne du dataframe \n");
                 printf("4 - Retour au precedent menu \n");
+                printf("5 - Afficher tout le DataFrame par l'index \n");
                 printf("\n");
                 printf("\n");
                 while (answer_part2 < 1 || answer_part2 > 4) {
@@ -109,6 +110,9 @@ int main() {
                     case 4:
                         answer = 0;
                         answer_part2 = 0;
+                        break;
+                    case 5:
+                        display_dataframe_by_index(cdf);
                         break;
                 }
                 break;
@@ -235,13 +239,13 @@ int main() {
                 switch (answer_part4) {
                     case 1:
                         result = column_number(cdf);
-                        printf("Votre DataFrame comporte actuellement %d colonnes. \n");
+                        printf("Votre DataFrame comporte actuellement %d colonnes. \n", result);
                         answer = 0;
                         answer_part4 = 0;
                         break;
                     case 2:
                         result = line_number(cdf);
-                        printf("Votre DataFrame comporte actuellement %d lignes. \n");
+                        printf("Votre DataFrame comporte actuellement %d lignes. \n", result);
                         answer = 0;
                         answer_part4 = 0;
                         break;
